@@ -1,4 +1,4 @@
-#include "entrydialog.h"
+﻿#include "entrydialog.h"
 #include "ui_entrydialog.h"
 #include <QDebug>
 #include "personaldailog.h"
@@ -11,7 +11,7 @@ EntryDialog::EntryDialog(QWidget *parent) :
 
     ui->lineEdit_2->setEchoMode(QLineEdit::Password);
     ui->movieLabel->setScaledContents(true);
-    QMovie *iconShow = new QMovie(":/new/prefix1/images/12.gif");
+    QMovie *iconShow = new QMovie(":/new/prefix1/images/back.png");
     ui->movieLabel->setMovie(iconShow);
     iconShow->start();
 

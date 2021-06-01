@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QButtonGroup>
 #include <oneSearchInfo.h>
+#include <QMenu>
+#include <QAction>
 #include "global.h"
 #include "databasemanager.h"
 
@@ -25,9 +27,18 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_pushButton_3_clicked();
+
+    void on_checkBox_stateChanged(int arg1);
+
+    void show_menu(const QPoint pos);
+
 private:
     Ui::SearchData *ui;
     QButtonGroup *bg;
+    DataBaseManager *dbMgr;
+
+    vector<oneSearchInfo> searchResult;
 
 public:
     bool MIR_NamesFromDB(QString partStr, vector<oneSearchInfo> &resultInfos);

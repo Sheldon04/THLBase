@@ -6,5 +6,8 @@
 #include <string>
 #include <QDebug>
 #include <QMessageBox>
+#include <map>
+
+#define INF 999999
 
 #endif // GLOBAL_H

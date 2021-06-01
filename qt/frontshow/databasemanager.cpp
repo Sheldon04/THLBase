@@ -14,9 +14,9 @@ bool DataBaseManager::searchAllInfo(QString mir_name_seq, std::vector<oneSearchI
     bool find = false;
     // 从数据库中查询景点信息
     QSqlQuery qsQuery = QSqlQuery(db);
-    QString strSqlText("SELECT * FROM mirnadata.all_expressed_mirna WHERE miR_name LIKE '%" + mir_name_seq + "%'");//查询语法
-    strSqlText = mode == 0 ? "SELECT * FROM mirnadata.all_expressed_mirna WHERE miR_name LIKE '%" + mir_name_seq + "%'" :
-                             "SELECT * FROM mirnadata.all_expressed_mirna WHERE miR_seq LIKE '%" + mir_name_seq + "%'";
+    QString strSqlText("SELECT * FROM thl_database.all_expressed_mirna WHERE miR_name LIKE '%" + mir_name_seq + "%'");//查询语法
+    strSqlText = mode == 0 ? "SELECT * FROM thl_database.all_expressed_mirna WHERE miR_name LIKE '%" + mir_name_seq + "%'" :
+                             "SELECT * FROM thl_database.all_expressed_mirna WHERE miR_seq LIKE '%" + mir_name_seq + "%'";
     qsQuery.prepare(strSqlText);
     qsQuery.exec();
     while (qsQuery.next()) //依次取出查询结果的每一条记录，直至结束
@@ -55,7 +55,7 @@ bool DataBaseManager::registerUserInfo(QString userid, QString phoneNumber, QStr
     // 判断id是否存在
 //    select 1 from user where id = xxx limit 1；
     QSqlQuery qsQuery = QSqlQuery(db);
-    QString strSqlText("SELECT 1 FROM mirnadata.register_info WHERE user_id = '" + userid + "' LIMIT 1");//查询语法
+    QString strSqlText("SELECT 1 FROM thl_database.register_info WHERE user_id = '" + userid + "' LIMIT 1");//查询语法
     qsQuery.prepare(strSqlText);
     qsQuery.exec();
     if (qsQuery.next())
@@ -64,7 +64,7 @@ bool DataBaseManager::registerUserInfo(QString userid, QString phoneNumber, QStr
         return false;
     }
 
-    QString info = QString("INSERT INTO mirnadata.register_info (user_id, phone_number, password, real_name, email) "
+    QString info = QString("INSERT INTO thl_database.register_info (user_id, phone_number, password, real_name, email) "
                  "VALUES ('%1', '%2', '%3', '%4', '%5')").arg(userid).arg(phoneNumber).arg(password).arg(realName).arg(email);
 
     qDebug() << info << endl;
@@ -79,11 +79,11 @@ bool DataBaseManager::registerUserInfo(QString userid, QString phoneNumber, QStr
 
 bool DataBaseManager::init()
 {
-    db.setHostName("127.0.0.1");
+    db.setHostName("rm-j6c1pi4d3j4u787x3mo.mysql.rds.aliyuncs.com");
     db.setPort(3306);
     db.setDatabaseName("mirnadatabase");
-    db.setUserName("root");
-    db.setPassword("ll5028852");
+    db.setUserName("thl_admin");
+    db.setPassword("Ll5028852");
     bool ok = db.open();
     if (ok)
     {
@@ -96,3 +96,45 @@ bool DataBaseManager::init()
         return false;
     }
 }
+
+bool DataBaseManager::countLens(std::map<int, int> &lens)
+{
+    QTime time;
+    time.start();
+    QSqlQuery qsQuery = QSqlQuery(db);
+    QString strSqlText("SELECT miR_seq FROM thl_database.all_expressed_mirna");     //查询语法
+    qsQuery.prepare(strSqlText);
+    qsQuery.exec();
+    while (qsQuery.next())
+    {
+        lens[qsQuery.value(0).toString().length()]++;
+    }
+
+    qDebug() << "miRNA长度查询结束，用时" << time.elapsed() << "ms" << endl;
+
+    return true;
+}
+
+bool DataBaseManager::getSummary(std::map<int, int> &lens, std::map<int, int> &type, std::map<int, int> &level)
+{
+    QTime time;
+    time.start();
+    QSqlQuery qsQuery = QSqlQuery(db);
+    QString strSqlText("SELECT miR_seq, type, expression_level FROM thl_database.all_expressed_mirna");     //查询语法
+    qsQuery.prepare(strSqlText);
+    qsQuery.exec();
+    while (qsQuery.next())
+    {
+        lens[qsQuery.value(0).toString().length()]++;
+        type[qsQuery.value(1).toString().compare("3'") == 0 ? 0 : 1]++;
+        if (qsQuery.value(2).toString().compare("low")) level[0]++;
+        else if (qsQuery.value(2).toString().compare("middle")) level[1]++;
+        else level[2]++;
+    }
+
+    qDebug() << "查询结束，用时" << time.elapsed() << "ms" << endl;
+
+    return true;
+}
+
+

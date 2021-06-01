@@ -3,6 +3,7 @@
 
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QTime>
 #include "global.h"
 #include "oneSearchInfo.h"
 
@@ -19,6 +20,10 @@ public:
     static bool registerUserInfo(QString userid, QString phoneNumber, QString password, QString realName, QString email);
 
     static bool init();
+
+    static bool countLens(std::map<int, int> &lens);
+
+    static bool getSummary(std::map<int, int> &lens, std::map<int, int> &type, std::map<int, int> &level);
 };
 
 #endif // DATABASEMANAGER_H

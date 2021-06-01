@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 #include "entrydialog.h"
 #include "register.h"
-#include "statistic.h"
 #include "aboutusdialog.h"
 #include <QMovie>
 
@@ -13,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     ui->movieLabel->setScaledContents(true);
-    QMovie *iconShow = new QMovie(":/new/prefix1/images/12.gif");
+    QMovie *iconShow = new QMovie(":/new/prefix1/images/back.png");
     ui->movieLabel->setMovie(iconShow);
     iconShow->start();
 
@@ -25,7 +24,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->pushButton->setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px;");
     ui->pushButton_2->setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px;");
     ui->pushButton_3->setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px;");
-    DataBaseManager::init();
 }
 
 MainWindow::~MainWindow()

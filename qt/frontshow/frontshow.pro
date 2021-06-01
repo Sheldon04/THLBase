@@ -4,6 +4,7 @@ QT       += sql
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
+CONFIG += qaxcontainer
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -18,47 +19,38 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     aboutusdialog.cpp \
-    adddata.cpp \
-    deletedata.cpp \
+    addrecord.cpp \
+    datavisualize.cpp \
     entrydialog.cpp \
     main.cpp \
     mainwindow.cpp \
-    modifydata.cpp \
     personaldailog.cpp \
     register.cpp \
     searchdata.cpp \
-    searchresult.cpp \
-    statistic.cpp \
     databasemanager.cpp
 
 HEADERS += \
     aboutusdialog.h \
-    adddata.h \
-    deletedata.h \
+    addrecord.h \
+    datavisualize.h \
     entrydialog.h \
     mainwindow.h \
-    modifydata.h \
     oneSearchInfo.h \
     personaldailog.h \
     register.h \
     searchdata.h \
-    searchresult.h \
-    statistic.h \
     databasemanager.h \
     global.h
 
 FORMS += \
     aboutusdialog.ui \
-    adddata.ui \
-    deletedata.ui \
+    addrecord.ui \
+    datavisualize.ui \
     entrydialog.ui \
     mainwindow.ui \
-    modifydata.ui \
     personaldailog.ui \
     register.ui \
-    searchdata.ui \
-    searchresult.ui \
-    statistic.ui
+    searchdata.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

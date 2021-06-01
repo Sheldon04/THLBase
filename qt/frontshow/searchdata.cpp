@@ -3,7 +3,6 @@
 #include <QButtonGroup>
 #include <QDebug>
 #include <QMovie>
-#include <QHeaderView>
 SearchData::SearchData(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SearchData)
@@ -13,37 +12,26 @@ SearchData::SearchData(QWidget *parent) :
     bg=new QButtonGroup(this);
     bg->addButton(ui->radioButton,0);//一个值为0
     bg->addButton(ui->radioButton_2,1);//一个值为1
+    this->dbMgr = new DataBaseManager();
     ui->radioButton->setChecked(true);
 
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows); //整行选中的方
+    //ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows); //整行选中的方
 
     ui->movieLabel->setScaledContents(true);
-    QMovie *iconShow = new QMovie(":/new/prefix1/images/12.gif");
+    QMovie *iconShow = new QMovie(":/new/prefix1/images/back.png");
     ui->movieLabel->setMovie(iconShow);
     iconShow->start();
 
     ui->pushButton->setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px;");
     ui->pushButton_2->setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px;");
-    //ui->tableWidget->setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px;");
+    ui->pushButton_3->setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px;");
+    ui->tableWidget->setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px;");
     //ui->textEdit->setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px;");
-
     ui->lineEdit->setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px;");
 
-
-    QStringList headerList;
-    headerList << "rep_miRID" << "miRBase_seq" << "miR_seq" << "rep_miRID"
-        << "miRBase_seq" << "type"<< "CG" << "dG"<< "Sum11(raw)" << "Sum12(raw)"<< "Sum13(raw)" << "Sum14(raw)"
-        << "Sum15(raw)" << "Sum21(raw)"<< "Sum22(raw)" << "Sum23(raw)"<< "Sum24(raw)" << "Sum25(raw)"<< "Spr11(raw)" << "Spr12(raw)"
-        << "Spr13(raw)" << "Spr14(raw)"<< "Spr15(raw)" << "Spr31(raw)"<< "Spr32(raw)" << "Spr33(raw)"<< "Spr34(raw)" << "Spr35(raw)"
-        << "Sum11(norm)" << "Sum12(norm)"  << "Sum13(norm)" << "Sum14(norm)"<< "Sum15(norm)" << "Sum21(norm)"<< "Sum22(norm)" << "Sum23(norm)"<< "Sum24(norm)" << "Sum25(norm)"
-        << "Spr11(norm)" << "Spr12(norm)"<< "Spr13(norm)" << "Spr14(norm)"<< "Spr15(norm)" << "Spr31(norm)" << "Spr32(norm)"
-           << "Spr33(norm)" << "Spr34(norm)"<< "Spr35(norm)" << "Expression level" ;
-
-           ui->tableWidget->setHorizontalHeaderLabels(headerList);
-    //QHeaderView *hview = ui->
-
-
+    ui->tableWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->tableWidget,SIGNAL(customContextMenuRequested(QPoint)),this,SLOT(show_menu(QPoint)));
 }
 
 SearchData::~SearchData()
@@ -58,8 +46,6 @@ void SearchData::on_pushButton_clicked()
     // 获取当前输入文本
     QString searchStr = ui->lineEdit->text();
     int sel= bg->checkedId();//取到所选的radioButton的值
-    vector<oneSearchInfo> searchResult;
-
 
     switch(sel)
     {
@@ -86,7 +72,7 @@ void SearchData::on_pushButton_clicked()
     // 在得到结果之后
 
     if (searchResult.size() == 0) { // 如果数组大小为空
-        QMessageBox::information(this, "Notation", "No such information");
+
     } else { // 数组不为空  含有查找信息
         // 将查找信息呈现并统计
         for (size_t i = 0; i < searchResult.size(); i++) {
@@ -148,13 +134,13 @@ void SearchData::on_pushButton_clicked()
 
 // 通过miR_name 的一部分来从数据库中查找所有有可能的值并返回
 bool SearchData::MIR_NamesFromDB(QString partStr, vector<oneSearchInfo> &resultInfos) {
-    return DataBaseManager::searchAllInfo(partStr, resultInfos, 0);
+    return this->dbMgr->searchAllInfo(partStr, resultInfos, 0);
 }
 
 
 // 通过miR_seq 的一部分来从数据库中查找所有有可能的值并返回
 bool SearchData::MIR_SeqFromDB(QString partStr, vector<oneSearchInfo> &resultInfos) {
-    return DataBaseManager::searchAllInfo(partStr, resultInfos, 1);
+    return this->dbMgr->searchAllInfo(partStr, resultInfos, 0);
 }
 
 
@@ -162,4 +148,46 @@ bool SearchData::MIR_SeqFromDB(QString partStr, vector<oneSearchInfo> &resultInf
 void SearchData::on_pushButton_2_clicked()
 {
     ui->tableWidget->clearContents();
+    searchResult.clear(); // 清空所有搜索数据
+}
+
+void SearchData::on_pushButton_3_clicked()
+{
+    // 由得到的searchResult搜索结果从数据库中删除这些数据
+}
+
+void SearchData::on_checkBox_stateChanged(int state)
+{
+    if (state == Qt::Checked) // "选中"
+    {
+        ui->tableWidget->setEditTriggers(QAbstractItemView::AllEditTriggers);
+    }
+    else if(state == Qt::PartiallyChecked) // "半选"
+    {
+        ui->tableWidget->setEditTriggers(QAbstractItemView::AllEditTriggers);
+    }
+    else // 未选中 - Qt::Unchecked
+    {
+        ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    }
+}
+
+void SearchData::show_menu(const QPoint pos)
+{
+    //设置菜单选项
+    QMenu *menu = new QMenu(ui->tableWidget);
+    QAction *pnew = new QAction("第一项",ui->tableWidget);
+    QAction *pnew1 = new QAction("第二项",ui->tableWidget);
+//    connect(pnew,SIGNAL(triggered()),this,SLOT(clickgoose()));
+//    connect(pnew1,SIGNAL(triggered()),this,SLOT(clickmms()));
+    menu->addAction(pnew);
+    menu->addAction(pnew1);
+    menu->move(cursor().pos());
+    menu->show();
+    //获得鼠标点击的x，y坐标点
+    int x = pos.x ();
+    int y = pos.y ();
+    QModelIndex index = ui->tableWidget->indexAt(QPoint(x,y));
+    int row = index.row ();//获得QTableWidget列表点击的行数
+    qDebug() << "row: " << row << endl;
 }
