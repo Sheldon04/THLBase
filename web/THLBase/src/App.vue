@@ -23,7 +23,7 @@
           </el-submenu>
           <el-menu-item index="/targets" class="submenu-title">miRNA Targets</el-menu-item>
           <el-menu-item index="/enrichment" class="submenu-title">Enrichment Analysis</el-menu-item>
-          <el-menu-item index="/about" class="submenu-title">About Us</el-menu-item>
+          <el-menu-item index="/about" class="submenu-title">About</el-menu-item>
         </el-menu>
       </el-header>
       <el-main>
@@ -55,6 +55,6 @@ export default {
 }
 .submenu-title{
   font-family: "Trebuchet";
-  font-size: 20px;
+  font-size: 18px;
 }
 </style>
