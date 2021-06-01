@@ -1,7 +1,7 @@
 ﻿#include "entrydialog.h"
 #include "ui_entrydialog.h"
 #include <QDebug>
-#include "personaldailog.h"
+#include "userwindow.h"
 #include <QMovie>
 EntryDialog::EntryDialog(QWidget *parent) :
     QDialog(parent),
@@ -41,8 +41,7 @@ void EntryDialog::on_pushButton_clicked()
 
     // 如果没有一致的用户名和密码  提示输入错误
 
-
-    PersonalDailog* newDialog = new PersonalDailog();
+    UserWindow* newDialog = new UserWindow();
     newDialog->show();
     delete this;
 

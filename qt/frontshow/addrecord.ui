@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>411</width>
-    <height>239</height>
+    <width>780</width>
+    <height>550</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>170</y>
+     <x>450</x>
+     <y>150</y>
      <width>91</width>
      <height>41</height>
     </rect>
@@ -29,18 +29,18 @@
   <widget class="QTextEdit" name="textEdit">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>50</y>
+     <x>90</x>
+     <y>90</y>
      <width>321</width>
-     <height>101</height>
+     <height>411</height>
     </rect>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_2">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>170</y>
+     <x>450</x>
+     <y>220</y>
      <width>91</width>
      <height>41</height>
     </rect>
@@ -52,34 +52,14 @@
   <widget class="QPushButton" name="pushButton_3">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>170</y>
+     <x>450</x>
+     <y>90</y>
      <width>91</width>
      <height>41</height>
     </rect>
    </property>
    <property name="text">
     <string>model</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>160</x>
-     <y>10</y>
-     <width>111</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Arial</family>
-     <pointsize>16</pointsize>
-     <italic>true</italic>
-    </font>
-   </property>
-   <property name="text">
-    <string>Add Data</string>
    </property>
   </widget>
  </widget>

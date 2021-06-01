@@ -24,6 +24,8 @@ public:
     static bool countLens(std::map<int, int> &lens);
 
     static bool getSummary(std::map<int, int> &lens, std::map<int, int> &type, std::map<int, int> &level);
+
+    static int insertData(const std::vector<std::vector<QString> > &data);
 };
 
 #endif // DATABASEMANAGER_H

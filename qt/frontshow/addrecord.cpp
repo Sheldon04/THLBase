@@ -1,4 +1,4 @@
-#include "addrecord.h"
+﻿#include "addrecord.h"
 #include "ui_addrecord.h"
 #include <QFileDialog>
 #include <ActiveQt/QAxObject>
@@ -44,7 +44,7 @@ void AddRecord::on_pushButton_clicked()
 
 void AddRecord::on_pushButton_2_clicked()
 {
-
+    int time = 0;
     for (auto aFile: fileNames) { // 对于每一个文件
         QAxObject* excel = new QAxObject("Excel.Application");
         //是否可视化excel
@@ -79,6 +79,7 @@ void AddRecord::on_pushButton_2_clicked()
         QVariant allEnvDataQVariant = allEnvData->property("Value");
         QVariantList allEnvDataList = allEnvDataQVariant.toList();
 
+        std::vector<std::vector<QString> > data;
         for(int i=0; i<= intRows-2; i++) // 对于每一行的数据
         {
             QVariantList allEnvDataList_i =  allEnvDataList[i].toList(); // 获取到此行的数据
@@ -89,23 +90,21 @@ void AddRecord::on_pushButton_2_clicked()
                 return;
             }
 
+            std::vector<QString> item;
             // 将获得的行数据导入数据库
             for(QVariant v : allEnvDataList_i) {
-                qDebug() << v.toString();
-
-
-
+                item.push_back(v.toString());
             }
+            data.push_back(item);
         }
+        time = DataBaseManager::insertData(data);
         workbooks->dynamicCall("Close()");
     }
 
-
     QString dlgTitle="Info";
-    QString strInfo="Successfully Add Data To DataBase!";
+    QString strInfo="Successfully Add Data To DataBase! Time: " + QString::number(time);
     QMessageBox::information(this, dlgTitle, strInfo,
     QMessageBox::Ok,QMessageBox::NoButton);
-
 }
 
 void AddRecord::on_pushButton_3_clicked()

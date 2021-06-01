@@ -1,7 +1,8 @@
-#ifndef ADDRECORD_H
+﻿#ifndef ADDRECORD_H
 #define ADDRECORD_H
 
 #include <QWidget>
+#include "databasemanager.h"
 
 namespace Ui {
 class AddRecord;

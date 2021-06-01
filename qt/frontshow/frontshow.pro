@@ -24,10 +24,10 @@ SOURCES += \
     entrydialog.cpp \
     main.cpp \
     mainwindow.cpp \
-    personaldailog.cpp \
     register.cpp \
     searchdata.cpp \
-    databasemanager.cpp
+    databasemanager.cpp \
+    userwindow.cpp
 
 HEADERS += \
     aboutusdialog.h \
@@ -36,11 +36,11 @@ HEADERS += \
     entrydialog.h \
     mainwindow.h \
     oneSearchInfo.h \
-    personaldailog.h \
     register.h \
     searchdata.h \
     databasemanager.h \
-    global.h
+    global.h \
+    userwindow.h
 
 FORMS += \
     aboutusdialog.ui \
@@ -48,9 +48,9 @@ FORMS += \
     datavisualize.ui \
     entrydialog.ui \
     mainwindow.ui \
-    personaldailog.ui \
     register.ui \
-    searchdata.ui
+    searchdata.ui \
+    userwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
