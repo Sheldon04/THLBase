@@ -26,6 +26,12 @@ public:
     static bool getSummary(std::map<int, int> &lens, std::map<int, int> &type, std::map<int, int> &level);
 
     static int insertData(const std::vector<std::vector<QString> > &data);
+
+    static int modifyData(const std::map<QString, std::map<QString, QString> > &mData);
+
+    static int deleteRecords(const std::vector<QString> &dItemNames);
+
+//    static const QString itemNames[50];
 };
 
 #endif // DATABASEMANAGER_H

@@ -6,6 +6,7 @@
 #include <oneSearchInfo.h>
 #include <QMenu>
 #include <QAction>
+#include <QTableWidgetSelectionRange>
 #include "global.h"
 #include "databasemanager.h"
 
@@ -33,12 +34,27 @@ private slots:
 
     void show_menu(const QPoint pos);
 
+    void on_tableWidget_cellChanged(int row, int column);
+
+    void on_pushButton_4_clicked();
+
+    void on_tableWidget_cellClicked(int row, int column);
+
+    void deleteItems();
+
 private:
     Ui::SearchData *ui;
     QButtonGroup *bg;
     DataBaseManager *dbMgr;
 
     vector<oneSearchInfo> searchResult;
+
+    std::map<QString, std::map<QString, QString> > modifyBuffer;
+
+    bool modifyMode = false;
+
+    // debug
+    void show();
 
 public:
     bool MIR_NamesFromDB(QString partStr, vector<oneSearchInfo> &resultInfos);

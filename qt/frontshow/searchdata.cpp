@@ -128,7 +128,6 @@ void SearchData::on_pushButton_clicked()
 
             ui->tableWidget->setItem(int(i), numLabel, new QTableWidgetItem(searchResult[i].expression_level));
         }
-
     }
 }
 
@@ -149,6 +148,9 @@ void SearchData::on_pushButton_2_clicked()
 {
     ui->tableWidget->clearContents();
     searchResult.clear(); // 清空所有搜索数据
+    ui->checkBox->setCheckState(Qt::Unchecked);
+    std::map<QString, std::map<QString, QString> > temp;
+    this->modifyBuffer.swap(temp);
 }
 
 void SearchData::on_pushButton_3_clicked()
@@ -160,15 +162,22 @@ void SearchData::on_checkBox_stateChanged(int state)
 {
     if (state == Qt::Checked) // "选中"
     {
-        ui->tableWidget->setEditTriggers(QAbstractItemView::AllEditTriggers);
+        ui->tableWidget->setEditTriggers(QAbstractItemView::DoubleClicked);
+        for(int i=0; i<ui->tableWidget->columnCount()-1; i++)
+        {
+            QTableWidgetItem* item = ui->tableWidget->item(i,0); //获取每行第1列的单元格指针
+            item->setFlags(Qt::ItemIsEnabled);//设置改item不可修改；
+        }
+        this->modifyMode = true;
     }
-    else if(state == Qt::PartiallyChecked) // "半选"
-    {
-        ui->tableWidget->setEditTriggers(QAbstractItemView::AllEditTriggers);
-    }
+//    else if(state == Qt::PartiallyChecked) // "半选"
+//    {
+//        ui->tableWidget->setEditTriggers(QAbstractItemView::DoubleClicked);
+//    }
     else // 未选中 - Qt::Unchecked
     {
         ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        this->modifyMode = false;
     }
 }
 
@@ -176,12 +185,9 @@ void SearchData::show_menu(const QPoint pos)
 {
     //设置菜单选项
     QMenu *menu = new QMenu(ui->tableWidget);
-    QAction *pnew = new QAction("第一项",ui->tableWidget);
-    QAction *pnew1 = new QAction("第二项",ui->tableWidget);
-//    connect(pnew,SIGNAL(triggered()),this,SLOT(clickgoose()));
-//    connect(pnew1,SIGNAL(triggered()),this,SLOT(clickmms()));
+    QAction *pnew = new QAction("Delete selected items",ui->tableWidget);
+    connect(pnew,SIGNAL(triggered()),this,SLOT(deleteItems()));
     menu->addAction(pnew);
-    menu->addAction(pnew1);
     menu->move(cursor().pos());
     menu->show();
     //获得鼠标点击的x，y坐标点
@@ -190,4 +196,65 @@ void SearchData::show_menu(const QPoint pos)
     QModelIndex index = ui->tableWidget->indexAt(QPoint(x,y));
     int row = index.row ();//获得QTableWidget列表点击的行数
     qDebug() << "row: " << row << endl;
+}
+
+void SearchData::on_tableWidget_cellChanged(int row, int column)
+{
+    if (this->modifyMode)
+    {
+//        this->blockSignals(true);
+        QString miR_index = ui->tableWidget->item(row, 0)->text();
+        qDebug() << ">>> Notice: " << miR_index << "changed" << endl;
+        this->modifyBuffer[miR_index][itemNames[column]] = ui->tableWidget->item(row, column)->text();
+//        this->blockSignals(false);
+    }
+}
+
+void SearchData::show()
+{
+    for(auto item : this->modifyBuffer)
+    {
+        qDebug() << "Index: " << item.first << endl;
+        for(auto changeItem : item.second)
+        {
+            qDebug() << changeItem.first << " ---> " << changeItem.second << endl;
+        }
+        qDebug() << endl;
+    }
+}
+
+void SearchData::on_pushButton_4_clicked()
+{
+//    show();
+    DataBaseManager::modifyData(this->modifyBuffer);
+//    QList<QTableWidgetSelectionRange> temp = ui->tableWidget->selectedRanges();
+//    for (QTableWidgetSelectionRange i : temp)
+//    {
+//        qDebug() << "top: " << i.topRow() << " bottom: " << i.bottomRow() << endl;
+//    }
+}
+
+void SearchData::on_tableWidget_cellClicked(int row, int column)
+{
+    if (column == 0)
+    {
+        // TODO 选中一行
+    }
+}
+
+void SearchData::deleteItems()
+{
+    std::vector<QString> dItemNames;
+    std::map<QString, bool> selected;
+    QList<QTableWidgetSelectionRange> temp = ui->tableWidget->selectedRanges();
+    for (QTableWidgetSelectionRange i : temp)
+    {
+        for(int j = i.topRow(); j <= i.bottomRow(); j++)
+            selected[ui->tableWidget->item(j, 0)->text()] = true;
+    }
+    for (auto item : selected)
+    {
+        dItemNames.push_back(item.first);
+    }
+    DataBaseManager::deleteRecords(dItemNames);
 }

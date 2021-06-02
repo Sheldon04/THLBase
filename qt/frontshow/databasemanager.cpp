@@ -2,10 +2,14 @@
 
 QSqlDatabase DataBaseManager::db = QSqlDatabase::addDatabase("QODBC");
 
+//const QString DataBaseManager::itemNames[50] = {
+
+//}
+
 DataBaseManager::DataBaseManager()
 {
     // 通过ODBC连接数据库
-//    db = QSqlDatabase::addDatabase("QODBC");
+    //    db = QSqlDatabase::addDatabase("QODBC");
 }
 
 // mode为0，表示按照mir_name进行检索，mode为1，表示按照mir_seq进行检索
@@ -53,19 +57,19 @@ bool DataBaseManager::searchAllInfo(QString mir_name_seq, std::vector<oneSearchI
 bool DataBaseManager::registerUserInfo(QString userid, QString phoneNumber, QString password, QString realName, QString email)
 {
     // 判断id是否存在
-//    select 1 from user where id = xxx limit 1；
+    //    select 1 from user where id = xxx limit 1；
     QSqlQuery qsQuery = QSqlQuery(db);
     QString strSqlText("SELECT 1 FROM thl_database.register_info WHERE user_id = '" + userid + "' LIMIT 1");//查询语法
     qsQuery.prepare(strSqlText);
     qsQuery.exec();
     if (qsQuery.next())
     {
-//        QMessageBox::information(nullptr, "Warning", "User id exist");
+        //        QMessageBox::information(nullptr, "Warning", "User id exist");
         return false;
     }
 
     QString info = QString("INSERT INTO thl_database.register_info (user_id, phone_number, password, real_name, email) "
-                 "VALUES ('%1', '%2', '%3', '%4', '%5')").arg(userid).arg(phoneNumber).arg(password).arg(realName).arg(email);
+                           "VALUES ('%1', '%2', '%3', '%4', '%5')").arg(userid).arg(phoneNumber).arg(password).arg(realName).arg(email);
 
     qDebug() << info << endl;
     qsQuery.prepare(info);
@@ -164,4 +168,46 @@ int DataBaseManager::insertData(const std::vector<std::vector<QString> > &data)
     return time.elapsed();
 }
 
+int DataBaseManager::modifyData(const std::map<QString, std::map<QString, QString> > &mData)
+{
+    QTime time;
+    time.start();
+    for(auto changeItem : mData)
+    {
+        QSqlQuery query;
+        QString sql = "UPDATE thl_database.all_expressed_mirna SET ";
+        for(auto item : changeItem.second)
+        {
+            QString temp;
+            temp = QString("`%1` = '%2', ").arg(item.first).arg(item.second);
+            if (item.first.compare("type == 0"))
+                temp.insert(temp.length() - 4, "\\");
+            sql.append(temp);
+        }
+        sql = sql.left(sql.length() - 2);
+        sql.append(" WHERE (`miR_index` = " + changeItem.first + ")");
+        query.prepare(sql);
+        qDebug() << sql << endl;
+        if(!query.exec()) qDebug() << "fail" << endl;
+        else qDebug() << "Success" << endl;
+    }
+    return time.elapsed();
+}
 
+int DataBaseManager::deleteRecords(const std::vector<QString> &dItemNames)
+{
+    QTime time;
+    QSqlQuery query;
+    time.start();
+    QString sql = "DELETE FROM thl_database.all_expressed_mirna WHERE ";
+    for (auto name : dItemNames)
+    {
+        sql.append(QString("`miR_index` = %1 or ").arg(name));
+    }
+    sql = sql.left(sql.length() - 4);
+    query.prepare(sql);
+    qDebug() << sql << endl;
+    if(!query.exec()) qDebug() << "fail" << endl;
+    else qDebug() << "Success" << endl;
+    return time.elapsed();
+}

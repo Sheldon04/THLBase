@@ -71,8 +71,6 @@ void AddRecord::on_pushButton_2_clicked()
         //qDebug() << intRows;
         //qDebug() << intCols;
 
-
-
         // 批量载入数据，这里默认读取B13:C最后
         QString Range = "A2:AV" +QString::number(intRows);
         QAxObject *allEnvData = worksheet->querySubObject("Range(QString)", Range);
@@ -104,7 +102,7 @@ void AddRecord::on_pushButton_2_clicked()
     QString dlgTitle="Info";
     QString strInfo="Successfully Add Data To DataBase! Time: " + QString::number(time);
     QMessageBox::information(this, dlgTitle, strInfo,
-    QMessageBox::Ok,QMessageBox::NoButton);
+                             QMessageBox::Ok,QMessageBox::NoButton);
 }
 
 void AddRecord::on_pushButton_3_clicked()
