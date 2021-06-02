@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface RNAService {
     List<MicroRNA> findAll();
+    List<MicroRNA> findRNAByNameOrSeq(String keyWord);
 }

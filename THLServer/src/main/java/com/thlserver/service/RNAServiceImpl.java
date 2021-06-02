@@ -21,4 +21,9 @@ public class RNAServiceImpl implements RNAService{
     public List<MicroRNA> findAll() {
         return rnaDao.findAll();
     }
+
+    @Override
+    public List<MicroRNA> findRNAByNameOrSeq(String keyWord) {
+        return rnaDao.findRNAByNameOrSeq(keyWord);
+    }
 }

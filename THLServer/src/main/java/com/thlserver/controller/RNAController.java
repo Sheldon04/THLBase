@@ -21,4 +21,9 @@ public class RNAController {
     public List<MicroRNA> findAll(){
         return rnaService.findAll();
     }
+
+    @GetMapping("findRNAByNameOrSeq")
+    public List<MicroRNA> findRNAByNameOrSeq(String keyWord){
+        return rnaService.findRNAByNameOrSeq(keyWord);
+    }
 }

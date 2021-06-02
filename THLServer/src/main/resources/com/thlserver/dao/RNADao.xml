@@ -6,4 +6,11 @@
         select miR_index, miR_name, miR_seq, expression_level, type, dG
         from thl_database.all_expressed_mirna
     </select>
+    <select id="findRNAByNameOrSeq" resultType="MicroRNA">
+        <bind name="keyWord" value="'%' + keyword + '%'" />
+        SELECT miR_index, miR_name, miR_seq, expression_level, type, dG
+        FROM thl_database.all_expressed_mirna
+        WHERE miR_name LIKE #{keyWord}
+        OR miR_seq LIKE #{keyWord}
+    </select>
 </mapper>

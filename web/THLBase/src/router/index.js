@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '../components/Index.vue'
 import Expression from '../components/search/Expression.vue'
+import ExpDetails from '../components/search/ExpDetails'
 import LinkRNA from '../components/search/LinkRNA.vue'
 import Others from '../components/search/Others.vue'
 import Enrichment from '../components/enrichment/Enrichment.vue'
@@ -48,6 +49,10 @@ var router = new Router({
     {
       path: '/about',
       component: About
+    },
+    {
+      path: '/search1/details',
+      component: ExpDetails
     }
   ]
 })
