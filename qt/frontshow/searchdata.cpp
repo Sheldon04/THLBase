@@ -12,7 +12,6 @@ SearchData::SearchData(QWidget *parent) :
     bg=new QButtonGroup(this);
     bg->addButton(ui->radioButton,0);//一个值为0
     bg->addButton(ui->radioButton_2,1);//一个值为1
-    this->dbMgr = new DataBaseManager();
     ui->radioButton->setChecked(true);
 
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -133,16 +132,18 @@ void SearchData::on_pushButton_clicked()
 
 // 通过miR_name 的一部分来从数据库中查找所有有可能的值并返回
 bool SearchData::MIR_NamesFromDB(QString partStr, vector<oneSearchInfo> &resultInfos) {
-    return this->dbMgr->searchAllInfo(partStr, resultInfos, 0);
+    QString info = DataBaseManager::searchAllInfo(partStr, resultInfos, 0);
+    ui->stateLabel->setText(info);
+    return true;
 }
 
 
 // 通过miR_seq 的一部分来从数据库中查找所有有可能的值并返回
 bool SearchData::MIR_SeqFromDB(QString partStr, vector<oneSearchInfo> &resultInfos) {
-    return this->dbMgr->searchAllInfo(partStr, resultInfos, 0);
+    QString info = DataBaseManager::searchAllInfo(partStr, resultInfos, 1);
+    ui->stateLabel->setText(info);
+    return true;
 }
-
-
 
 void SearchData::on_pushButton_2_clicked()
 {

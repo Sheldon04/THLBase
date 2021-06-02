@@ -1,5 +1,4 @@
-﻿#include "ui_personaldailog.h"
-#include <searchdata.h>
+﻿#include <searchdata.h>
 #include <QGridLayout>
 #include "addrecord.h"
 #include "databasemanager.h"
@@ -29,6 +28,8 @@ UserWindow::UserWindow(QWidget *parent) :
     ui->tabWidget->addTab(new SearchData(), "Search");
     ui->tabWidget->addTab(new AddRecord(), "Add Record");
     ui->tabWidget->setLayout(new QGridLayout());
+
+    this->dbMgr = new DataBaseManager();
 }
 
 UserWindow::~UserWindow()

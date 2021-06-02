@@ -1,4 +1,4 @@
-#ifndef ENTRYDIALOG_H
+﻿#ifndef ENTRYDIALOG_H
 #define ENTRYDIALOG_H
 
 #include <QDialog>
@@ -20,6 +20,9 @@ private slots:
 
 private:
     Ui::EntryDialog *ui;
+
+signals:
+    void hideWindow();
 };
 
 #endif // ENTRYDIALOG_H

@@ -1,7 +1,8 @@
-#ifndef USERWINDOW_H
+﻿#ifndef USERWINDOW_H
 #define USERWINDOW_H
 
 #include <QWidget>
+#include "databasemanager.h"
 
 namespace Ui {
 class UserWindow;
@@ -17,6 +18,8 @@ public:
 
 private:
     Ui::UserWindow *ui;
+
+    DataBaseManager *dbMgr;
 };
 
 #endif // USERWINDOW_H

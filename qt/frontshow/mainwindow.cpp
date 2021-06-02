@@ -36,6 +36,8 @@ void MainWindow::on_pushButton_2_clicked()
 {
     EntryDialog *newDialog = new EntryDialog();
     newDialog->show();
+    newDialog->show();
+    connect(newDialog, &EntryDialog::hideWindow, this, &MainWindow::hide);
 }
 
 
@@ -51,4 +53,11 @@ void MainWindow::on_pushButton_3_clicked()
 {
     AboutUsDialog* newDialog = new AboutUsDialog();
     newDialog->show();
+}
+
+void MainWindow::hide()
+{
+    EntryDialog *temp = qobject_cast<EntryDialog *>(sender());
+    delete temp;
+    this->setVisible(false);
 }

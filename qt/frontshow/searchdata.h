@@ -45,7 +45,6 @@ private slots:
 private:
     Ui::SearchData *ui;
     QButtonGroup *bg;
-    DataBaseManager *dbMgr;
 
     vector<oneSearchInfo> searchResult;
 

@@ -1,21 +1,25 @@
 ﻿#include "databasemanager.h"
 
 QSqlDatabase DataBaseManager::db = QSqlDatabase::addDatabase("QODBC");
+DataBaseManager * DataBaseManager::instance = nullptr;
 
 //const QString DataBaseManager::itemNames[50] = {
 
 //}
 
-DataBaseManager::DataBaseManager()
+DataBaseManager::DataBaseManager() : QObject(nullptr)
 {
-    // 通过ODBC连接数据库
-    //    db = QSqlDatabase::addDatabase("QODBC");
+
 }
 
 // mode为0，表示按照mir_name进行检索，mode为1，表示按照mir_seq进行检索
-bool DataBaseManager::searchAllInfo(QString mir_name_seq, std::vector<oneSearchInfo> &resultInfos, int mode)
+QString DataBaseManager::searchAllInfo(QString mir_name_seq, std::vector<oneSearchInfo> &resultInfos, int mode)
 {
+    QTime time;
+    QString info;
+    time.start();
     bool find = false;
+    int cnt = 0;
     // 从数据库中查询景点信息
     QSqlQuery qsQuery = QSqlQuery(db);
     QString strSqlText("SELECT * FROM thl_database.all_expressed_mirna WHERE miR_name LIKE '%" + mir_name_seq + "%'");//查询语法
@@ -50,8 +54,13 @@ bool DataBaseManager::searchAllInfo(QString mir_name_seq, std::vector<oneSearchI
                            spr1_raw, spr3_raw, sum1_norm, sum2_norm, spr1_norm, spr3_norm, qsQuery.value(48).toString());
         resultInfos.push_back(temp);
         find = true;
+        cnt++;
     }
-    return find ? true : false;
+    if (find)
+        info = QString("Search success, find %1 records, cost %2 ms").arg(cnt).arg(time.elapsed());
+    else
+        info = "No such record";
+    return info;
 }
 
 bool DataBaseManager::registerUserInfo(QString userid, QString phoneNumber, QString password, QString realName, QString email)

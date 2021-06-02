@@ -4,18 +4,25 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QTime>
+#include <QObject>
 #include "global.h"
 #include "oneSearchInfo.h"
 
-class DataBaseManager
+class DataBaseManager : public QObject
 {
+Q_OBJECT
+
 public:
     DataBaseManager();
+
+    ~DataBaseManager() {
+
+    }
 
     static QSqlDatabase db;                    // 用于数据库操作
 
 public:
-    static bool searchAllInfo(QString mir_name_seq, std::vector<oneSearchInfo> &resultInfos, int mode);
+    static QString searchAllInfo(QString mir_name_seq, std::vector<oneSearchInfo> &resultInfos, int mode);
 
     static bool registerUserInfo(QString userid, QString phoneNumber, QString password, QString realName, QString email);
 
@@ -31,7 +38,20 @@ public:
 
     static int deleteRecords(const std::vector<QString> &dItemNames);
 
-//    static const QString itemNames[50];
+    static DataBaseManager* getInstance()
+    {
+        if(instance == NULL)
+            instance = new DataBaseManager();
+        return instance;
+    }
+
+private:
+    static DataBaseManager *instance;
+
+signals:
+    void updateInfo(QString info);
+
+    //    static const QString itemNames[50];
 };
 
 #endif // DATABASEMANAGER_H
