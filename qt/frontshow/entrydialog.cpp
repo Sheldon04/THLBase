@@ -1,7 +1,7 @@
-#include "entrydialog.h"
+﻿#include "entrydialog.h"
 #include "ui_entrydialog.h"
 #include <QDebug>
-#include "personaldailog.h"
+#include "userwindow.h"
 #include <QMovie>
 EntryDialog::EntryDialog(QWidget *parent) :
     QDialog(parent),
@@ -11,7 +11,7 @@ EntryDialog::EntryDialog(QWidget *parent) :
 
     ui->lineEdit_2->setEchoMode(QLineEdit::Password);
     ui->movieLabel->setScaledContents(true);
-    QMovie *iconShow = new QMovie(":/new/prefix1/images/12.gif");
+    QMovie *iconShow = new QMovie(":/new/prefix1/images/back.png");
     ui->movieLabel->setMovie(iconShow);
     iconShow->start();
 
@@ -31,20 +31,11 @@ void EntryDialog::on_pushButton_clicked()
     QString idStr = ui->lineEdit->text();
     QString passWordStr = ui->lineEdit_2->text();
 
-    // 此处连接数据库
-
-
     // 如果用户名和密码一致 则进入系统
-
-
-
 
     // 如果没有一致的用户名和密码  提示输入错误
 
-
-    PersonalDailog* newDialog = new PersonalDailog();
+    UserWindow* newDialog = new UserWindow();
     newDialog->show();
-    delete this;
-
-
+    emit hideWindow();
 }

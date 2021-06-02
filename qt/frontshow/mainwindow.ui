@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1033</width>
-    <height>781</height>
+    <width>1000</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,9 +18,9 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>320</y>
+      <y>360</y>
       <width>201</width>
-      <height>131</height>
+      <height>81</height>
      </rect>
     </property>
     <property name="font">
@@ -43,9 +43,9 @@
     <property name="geometry">
      <rect>
       <x>410</x>
-      <y>320</y>
+      <y>360</y>
       <width>201</width>
-      <height>131</height>
+      <height>81</height>
      </rect>
     </property>
     <property name="font">
@@ -68,9 +68,9 @@
     <property name="geometry">
      <rect>
       <x>660</x>
-      <y>320</y>
+      <y>360</y>
       <width>201</width>
-      <height>131</height>
+      <height>81</height>
      </rect>
     </property>
     <property name="font">
@@ -89,26 +89,22 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>30</y>
-      <width>421</width>
-      <height>121</height>
+      <x>390</x>
+      <y>90</y>
+      <width>251</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Times New Roman</family>
-      <pointsize>48</pointsize>
-      <weight>9</weight>
-      <italic>false</italic>
-      <bold>false</bold>
+      <family>Arial</family>
+      <pointsize>22</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
      </font>
     </property>
     <property name="layoutDirection">
      <enum>Qt::LeftToRight</enum>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 75 48pt &quot;Times New Roman&quot;;</string>
     </property>
     <property name="text">
      <string>miRNA DataBase</string>
@@ -119,8 +115,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>1031</width>
-      <height>781</height>
+      <width>1000</width>
+      <height>780</height>
      </rect>
     </property>
     <property name="text">
@@ -131,8 +127,8 @@
     <property name="geometry">
      <rect>
       <x>400</x>
-      <y>140</y>
-      <width>181</width>
+      <y>180</y>
+      <width>211</width>
       <height>51</height>
      </rect>
     </property>
@@ -141,15 +137,12 @@
       <family>Times New Roman</family>
       <pointsize>18</pointsize>
       <weight>50</weight>
-      <italic>true</italic>
+      <italic>false</italic>
       <bold>false</bold>
      </font>
     </property>
     <property name="layoutDirection">
      <enum>Qt::LeftToRight</enum>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: italic 18pt &quot;Times New Roman&quot;;</string>
     </property>
     <property name="text">
      <string>Administrator Server</string>
@@ -167,7 +160,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1033</width>
+     <width>1000</width>
      <height>18</height>
     </rect>
    </property>

@@ -4,5 +4,6 @@
         <file>images/12.gif</file>
         <file>images/3.gif</file>
         <file>images/4.gif</file>
+        <file>images/back.png</file>
     </qresource>
 </RCC>

@@ -1,4 +1,4 @@
-#include "aboutusdialog.h"
+﻿#include "aboutusdialog.h"
 #include "ui_aboutusdialog.h"
 #include <QMovie>
 
@@ -8,7 +8,7 @@ AboutUsDialog::AboutUsDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->movieLabel->setScaledContents(true);
-    QMovie *iconShow = new QMovie(":/new/prefix1/images/12.gif");
+    QMovie *iconShow = new QMovie(":/new/prefix1/images/back.png");
     ui->movieLabel->setMovie(iconShow);
     iconShow->start();
 }

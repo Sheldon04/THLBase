@@ -1,7 +1,8 @@
-#ifndef MAINWINDOW_H
+﻿#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "global.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -21,6 +22,8 @@ private slots:
     void on_pushButton_clicked();
 
     void on_pushButton_3_clicked();
+
+    void hide();
 
 private:
     Ui::MainWindow *ui;
