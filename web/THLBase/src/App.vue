@@ -17,10 +17,10 @@
                   Search
                 </span>
             </template>
-            <el-menu-item index="/search1">Expression Level</el-menu-item>
-            <el-menu-item index="/search2">All miRNAs</el-menu-item>
-            <el-menu-item index="/search3">miRNA-Other</el-menu-item>
+            <el-menu-item index="/search1">miRNA</el-menu-item>
+            <el-menu-item index="/search2">miRNA-Other</el-menu-item>
           </el-submenu>
+          <el-menu-item index="/diffexp" class="submenu-title">Differential Expression</el-menu-item>
           <el-menu-item index="/targets" class="submenu-title">miRNA Targets</el-menu-item>
           <el-menu-item index="/enrichment" class="submenu-title">Enrichment Analysis</el-menu-item>
           <el-menu-item index="/about" class="submenu-title">About</el-menu-item>

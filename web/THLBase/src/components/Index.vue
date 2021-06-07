@@ -52,7 +52,7 @@ export default {
 
 <style>
 .block{
-  height: 800px;
+  height: 600px;
   width:600px;
   position: absolute;
   left:750px;
@@ -66,7 +66,6 @@ export default {
   top: 100px;
 }
 .intro{
-  height: 400px;
   width:600px;
   position: absolute;
   left:50px;

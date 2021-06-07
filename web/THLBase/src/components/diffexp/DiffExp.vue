@@ -1,12 +1,12 @@
 <template>
   <div>
-    enrich
+    hello
   </div>
 </template>
 
 <script>
 export default {
-  name: 'LinkRNA'
+  name: 'DiffExp'
 }
 </script>
 
