@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.thlserver.dao.RNADao">
-
     <select id="findAll" resultType="MicroRNA">
         select miR_index, miR_name, miR_seq, expression_level, type, dG
         from thl_database.all_expressed_mirna
@@ -12,5 +11,18 @@
         FROM thl_database.all_expressed_mirna
         WHERE miR_name LIKE #{keyWord}
         OR miR_seq LIKE #{keyWord}
+    </select>
+    <select id="findRNADetails" resultType="MicroRNA">
+        <bind name="id" value="'%' + index + '%'" />
+        SELECT miR_index, miR_name, miR_seq, expression_level, type, dG, `Sum11(raw)` as sum11_r, `Sum12(raw)` as sum12_r, `Sum13(raw)` as sum13_r, `Sum14(raw)` as sum14_r, `Sum15(raw)` as sum15_r, `Sum21(raw)` as sum21_r, `Sum22(raw)` as sum22_r, `Sum23(raw)` as sum23_r, `Sum24(raw)` as sum24_r, `Sum25(raw)` as sum25_r, `Spr11(raw)` as spr11_r, `Spr12(raw)` as spr12_r, `Spr13(raw)` as spr13_r, `Spr14(raw)` as spr14_r, `Spr15(raw)` as spr15_r, `Spr31(raw)` as spr31_r, `Spr32(raw)` as spr32_r, `Spr33(raw)` as spr33_r, `Spr34(raw)` as spr34_r, `Spr35(raw)` as spr35_r, `Sum11(norm)` as sum11_n, `Sum12(norm)` as sum12_n, `Sum13(norm)` as sum13_n, `Sum14(norm)` as sum14_n, `Sum15(norm)` as sum15_n, `Sum21(norm)` as sum21_n, `Sum22(norm)` as sum22_n, `Sum23(norm)` as sum23_n, `Sum24(norm)` as sum24_n, `Sum25(norm)` as sum25_n, `Spr11(norm)` as spr11_n, `Spr12(norm)` as spr12_n, `Spr13(norm)` as spr13_n, `Spr14(norm)` as spr14_n, `Spr15(norm)` as spr15_n, `Spr31(norm)` as spr31_n, `Spr32(norm)` as spr32_n, `Spr33(norm)` as spr33_n, `Spr34(norm)` as spr34_n, `Spr35(norm)` as spr35_n
+        FROM thl_database.all_expressed_mirna
+        WHERE miR_index LIKE #{index}
+    </select>
+    <select id="findDiffExp" resultType="MicroRNA">
+        <bind name="miR_name" value="'%' + miR_name + '%'" />
+        <bind name="group" value="'%' + group + '%'" />
+        SELECT id as miR_index, miR_name_idx as miR_name, up_down, fold_change, `log2(fold_change)` as log2_fold_change, `pvalue(t_test)` as p_value
+        FROM thl_database.sum1_vs_spr3
+        WHERE miR_name_idx = #{miR_name}
     </select>
 </mapper>

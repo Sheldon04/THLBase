@@ -14,7 +14,7 @@ public class RNAServiceImpl implements RNAService{
     private RNADao rnaDao;
 
     @Autowired
-    public void setUserDao (RNADao rnaDao) {
+    public void setRnaDao (RNADao rnaDao) {
         this.rnaDao = rnaDao;
     }
     @Override
@@ -25,5 +25,15 @@ public class RNAServiceImpl implements RNAService{
     @Override
     public List<MicroRNA> findRNAByNameOrSeq(String keyWord) {
         return rnaDao.findRNAByNameOrSeq(keyWord);
+    }
+
+    @Override
+    public MicroRNA findRNADetails(String id) {
+        return rnaDao.findRNADetails(id);
+    }
+
+    @Override
+    public MicroRNA findDiffExp(String miR_name, String group) {
+        return rnaDao.findDiffExp(miR_name, group);
     }
 }

@@ -10,4 +10,6 @@ import java.util.List;
 public interface RNADao {
     List<MicroRNA> findAll();
     List<MicroRNA> findRNAByNameOrSeq(@Param("keyword") String keyWord);
+    MicroRNA findRNADetails(@Param("index") String id);
+    MicroRNA findDiffExp(@Param("miR_name") String miR_name, @Param("group") String group);
 }
