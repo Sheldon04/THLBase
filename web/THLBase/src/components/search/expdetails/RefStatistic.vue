@@ -2,7 +2,7 @@
   <div>
     <div class="navBar">
       <el-menu
-        default-active="1-1"
+        :default-active="activeIndex"
         class="el-menu-vertical-demo"
         :default-openeds="defalut"
         @select="handleSelect"
@@ -46,6 +46,11 @@
 <script>
 export default {
   name: 'RefStatistic',
+  data () {
+    return {
+      activeIndex: this.$route.path
+    }
+  },
   methods: {
     handleSelect (key, keyPath) {
       console.log(key, keyPath)

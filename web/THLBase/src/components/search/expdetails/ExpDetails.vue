@@ -2,9 +2,8 @@
   <div>
     <div class="navBar">
       <el-menu
-        default-active="1-1"
+        :default-active="activeIndex"
         class="el-menu-vertical-demo"
-        :default-openeds="defalut"
         @select="handleSelect"
         background-color="#545c64"
         text-color="#fff"
@@ -41,10 +40,14 @@
       </el-menu>
     </div>
     <div class="introduction">
-      <ul>
+      <el-tag type="info">Name</el-tag>
+      <el-link type="success" v-bind="miR_name" class="attr">{{miR_name}}</el-link>
+      <br><br>
+      <el-tag type="info">Note</el-tag>
+      <ul class="note">
         <li>The research material is the serum of five cows in summer and five cows in spring.</li>
-        <li>For the two groups of samples (<b>Sum1 vs Spr3</b>)，the location is the same but the seasons are different.
-        </li>
+        <li>For the two groups of samples (<b>Sum1 vs Spr3</b>)，the location is the same but the seasons are different.</li>
+        <li>For the two groups of samples (<b>Sum1/Spr1 vs Sum2/Spr3</b>)，the season is the same but the locations are different.</li>
       </ul>
     </div>
     <div class="details">
@@ -305,6 +308,7 @@ export default {
   name: 'ExpDetails',
   data () {
     return {
+      activeIndex: this.$route.path,
       tableData1: [],
       tableData2: [],
       tableData3: [],
@@ -314,7 +318,8 @@ export default {
       tableData7: [],
       tableData8: [],
       loading: true,
-      id: ''
+      id: '',
+      miR_name: ''
     }
   },
   methods: {
@@ -332,6 +337,7 @@ export default {
     var keyWord = '?id=' + this.$route.query.id
     console.log(keyWord)
     this.$http.get('http://localhost:8989/mirna/findRNADetails' + keyWord).then(res => {
+      this.miR_name = res.data['miR_name']
       var s1 = JSON.stringify(res.data, ['sum11_r', 'sum12_r', 'sum13_r', 'sum14_r', 'sum15_r'])
       this.tableData1.push(JSON.parse(s1))
       var s2 = JSON.stringify(res.data, ['sum21_r', 'sum22_r', 'sum23_r', 'sum24_r', 'sum25_r'])
@@ -358,7 +364,7 @@ export default {
 .details {
   position: absolute;
   left: 400px;
-  top: 100px;
+  top: 300px;
 }
 
 .navBar {
@@ -369,8 +375,19 @@ export default {
 .introduction {
   position: absolute;
   width: 800px;
-  top: 0px;
+  top: 100px;
   left: 400px;
   font-family: "Times New Roman";
+}
+.note{
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  font-size: 18px;
+}
+.attr{
+  font-family: "Times New Roman";
+  font-size: 30px;
+  left: 20px;
 }
 </style>
