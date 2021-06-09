@@ -42,6 +42,12 @@ private slots:
 
     void deleteItems();
 
+    void on_pushButton_5_clicked();
+
+    void on_checkBox_2_stateChanged(int arg1);
+
+    void on_pushButton_6_clicked();
+
 private:
     Ui::SearchData *ui;
     QButtonGroup *bg;
@@ -51,6 +57,8 @@ private:
     std::map<QString, std::map<QString, QString> > modifyBuffer;
 
     bool modifyMode = false;
+
+    bool encryption = false;
 
     // debug
     void show();

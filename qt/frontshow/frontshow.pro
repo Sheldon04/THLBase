@@ -20,6 +20,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     aboutusdialog.cpp \
     addrecord.cpp \
+    baseEncode.cpp \
     datavisualize.cpp \
     entrydialog.cpp \
     main.cpp \
@@ -32,8 +33,10 @@ SOURCES += \
 HEADERS += \
     aboutusdialog.h \
     addrecord.h \
+    baseEncode.h \
     datavisualize.h \
     entrydialog.h \
+    huffTree.h \
     mainwindow.h \
     oneSearchInfo.h \
     register.h \

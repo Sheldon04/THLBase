@@ -39,7 +39,7 @@
   <widget class="QRadioButton" name="radioButton">
    <property name="geometry">
     <rect>
-     <x>200</x>
+     <x>160</x>
      <y>60</y>
      <width>89</width>
      <height>16</height>
@@ -52,7 +52,7 @@
   <widget class="QRadioButton" name="radioButton_2">
    <property name="geometry">
     <rect>
-     <x>340</x>
+     <x>270</x>
      <y>60</y>
      <width>89</width>
      <height>16</height>
@@ -345,7 +345,7 @@
   <widget class="QCheckBox" name="checkBox">
    <property name="geometry">
     <rect>
-     <x>470</x>
+     <x>370</x>
      <y>60</y>
      <width>71</width>
      <height>16</height>
@@ -381,6 +381,45 @@
     <string/>
    </property>
   </widget>
+  <widget class="QPushButton" name="pushButton_5">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>60</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>DownLoad</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="checkBox_2">
+   <property name="geometry">
+    <rect>
+     <x>570</x>
+     <y>65</y>
+     <width>81</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>encryption</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_6">
+   <property name="geometry">
+    <rect>
+     <x>670</x>
+     <y>60</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Decode</string>
+   </property>
+  </widget>
   <zorder>movieLabel</zorder>
   <zorder>label_2</zorder>
   <zorder>lineEdit</zorder>
@@ -393,6 +432,9 @@
   <zorder>checkBox</zorder>
   <zorder>pushButton_4</zorder>
   <zorder>stateLabel</zorder>
+  <zorder>pushButton_5</zorder>
+  <zorder>checkBox_2</zorder>
+  <zorder>pushButton_6</zorder>
  </widget>
  <resources/>
  <connections/>

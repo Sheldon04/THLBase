@@ -3,6 +3,11 @@
 #include <QButtonGroup>
 #include <QDebug>
 #include <QMovie>
+#include <QMessageBox>
+#include <QFileDialog>
+#include <ActiveQt/QAxObject>
+#include <QVariant>
+#include <baseEncode.h>
 SearchData::SearchData(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SearchData)
@@ -141,7 +146,7 @@ bool SearchData::MIR_NamesFromDB(QString partStr, vector<oneSearchInfo> &resultI
 // 通过miR_seq 的一部分来从数据库中查找所有有可能的值并返回
 bool SearchData::MIR_SeqFromDB(QString partStr, vector<oneSearchInfo> &resultInfos) {
     QString info = DataBaseManager::searchAllInfo(partStr, resultInfos, 1);
-    ui->stateLabel->setText(info);
+    ui->stateLabel->setText(info);////////////////////
     return true;
 }
 
@@ -258,4 +263,160 @@ void SearchData::deleteItems()
         dItemNames.push_back(item.first);
     }
     DataBaseManager::deleteRecords(dItemNames);
+}
+
+void SearchData::on_pushButton_5_clicked()
+{
+    QString srcDirPath = QFileDialog::getExistingDirectory(this, "Choose Directory","/");
+    if (srcDirPath.length() > 0) {
+        qDebug() << srcDirPath;
+        // 获取到了路径信息 在此路径下生成Excel文件
+        // searchResult : 49 infos
+        QAxObject* excel = new QAxObject("Excel.Application");
+        //是否可视化excel
+        excel->dynamicCall("SetVisible(bool Visible)", false);
+        //是否弹出警告窗口
+        excel->setProperty("DisplayAlerts", false);
+
+        QAxObject *workbooks = excel->querySubObject("Workbooks");
+        workbooks->dynamicCall("Add");
+
+        QAxObject* workbook = excel->querySubObject("ActiveWorkBook");
+        QAxObject* sheets = workbook->querySubObject("Sheets");
+        QAxObject* sheet = sheets->querySubObject("Item(int)", 1);
+
+
+        QAxObject* speCell;
+        // 设置创建出的单元格的值
+        for (size_t i = 0; i < searchResult.size(); i++) {
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 1); speCell->dynamicCall("Value",searchResult[i].miR_index);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 2); speCell->dynamicCall("Value",searchResult[i].miR_name);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 3); speCell->dynamicCall("Value",searchResult[i].miR_seq);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 4); speCell->dynamicCall("Value",searchResult[i].rep_miRIDl);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 5); speCell->dynamicCall("Value",searchResult[i].miRbase_seq);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 6); speCell->dynamicCall("Value",searchResult[i].type);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 7); speCell->dynamicCall("Value",searchResult[i].CG);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 8); speCell->dynamicCall("Value",searchResult[i].dG);
+
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 9); speCell->dynamicCall("Value",searchResult[i].sum1_raw[0]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 10); speCell->dynamicCall("Value",searchResult[i].sum1_raw[1]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 11); speCell->dynamicCall("Value",searchResult[i].sum1_raw[2]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 12); speCell->dynamicCall("Value",searchResult[i].sum1_raw[3]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 13); speCell->dynamicCall("Value",searchResult[i].sum1_raw[4]);
+
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 14); speCell->dynamicCall("Value",searchResult[i].sum2_raw[0]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 15); speCell->dynamicCall("Value",searchResult[i].sum2_raw[1]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 16); speCell->dynamicCall("Value",searchResult[i].sum2_raw[2]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 17); speCell->dynamicCall("Value",searchResult[i].sum2_raw[3]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 18); speCell->dynamicCall("Value",searchResult[i].sum2_raw[4]);
+
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 19); speCell->dynamicCall("Value",searchResult[i].spr1_raw[0]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 20); speCell->dynamicCall("Value",searchResult[i].spr1_raw[1]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 21); speCell->dynamicCall("Value",searchResult[i].spr1_raw[2]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 22); speCell->dynamicCall("Value",searchResult[i].spr1_raw[3]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 23); speCell->dynamicCall("Value",searchResult[i].spr1_raw[4]);
+
+
+
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 24); speCell->dynamicCall("Value",searchResult[i].spr3_raw[0]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 25); speCell->dynamicCall("Value",searchResult[i].spr3_raw[1]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 26); speCell->dynamicCall("Value",searchResult[i].spr3_raw[2]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 27); speCell->dynamicCall("Value",searchResult[i].spr3_raw[3]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 28); speCell->dynamicCall("Value",searchResult[i].spr3_raw[4]);
+
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 29); speCell->dynamicCall("Value",searchResult[i].sum1_norm[0]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 30); speCell->dynamicCall("Value",searchResult[i].sum1_norm[1]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 31); speCell->dynamicCall("Value",searchResult[i].sum1_norm[2]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 32); speCell->dynamicCall("Value",searchResult[i].sum1_norm[3]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 33); speCell->dynamicCall("Value",searchResult[i].sum1_norm[4]);
+
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 34); speCell->dynamicCall("Value",searchResult[i].sum2_norm[0]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 35); speCell->dynamicCall("Value",searchResult[i].sum2_norm[1]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 36); speCell->dynamicCall("Value",searchResult[i].sum2_norm[2]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 37); speCell->dynamicCall("Value",searchResult[i].sum2_norm[3]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 38); speCell->dynamicCall("Value",searchResult[i].sum2_norm[4]);
+
+
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 39); speCell->dynamicCall("Value",searchResult[i].spr1_norm[0]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 40); speCell->dynamicCall("Value",searchResult[i].spr1_norm[1]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 41); speCell->dynamicCall("Value",searchResult[i].spr1_norm[2]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 42); speCell->dynamicCall("Value",searchResult[i].spr1_norm[3]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 43); speCell->dynamicCall("Value",searchResult[i].spr1_norm[4]);
+
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 44); speCell->dynamicCall("Value",searchResult[i].spr3_norm[0]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 45); speCell->dynamicCall("Value",searchResult[i].spr3_norm[1]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 46); speCell->dynamicCall("Value",searchResult[i].spr3_norm[2]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 47); speCell->dynamicCall("Value",searchResult[i].spr3_norm[3]);
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 48); speCell->dynamicCall("Value",searchResult[i].spr3_norm[4]);
+
+            speCell = sheet->querySubObject("Cells(int,int)", 2+i, 49); speCell->dynamicCall("Value",searchResult[i].expression_level);
+
+        }
+
+        QDate D; D=QDate::currentDate();
+        QTime T; T=QTime::currentTime();
+        QString bagname =QString("%1-%2-%3-%4-%5-%6").arg(D.year()).arg(D.month()).arg(D.day()).arg(T.hour()).arg(T.minute()).arg(T.second());//指定文件路径
+
+        QString outFilePath1 = srcDirPath + "/" + bagname;
+        QString outFilePath = outFilePath1 +".xlsx";
+
+        // 导出Excel数据
+        workbook->dynamicCall("SaveAs(const QString &)", QDir::toNativeSeparators(outFilePath));
+
+        // 释放excel
+        if (excel != NULL)
+        {
+            excel->dynamicCall("Quit()");
+            delete excel;
+            excel = NULL;
+        }
+
+        if (this->encryption) { // 如果导出数据需要加密
+            QString outFilePath3 = outFilePath1 + ".THL";
+            huffEncode he; he.encode(outFilePath.toStdString().c_str(), outFilePath3.toStdString().c_str());
+            QFile fileTemp(outFilePath); fileTemp.remove();
+            //huffDecode hd; hd.decode(outFilePath3.toStdString().c_str(), "C:/Users/lenovo/Desktop");
+        }
+    }
+}
+
+void SearchData::on_checkBox_2_stateChanged(int state)
+{
+    if (state == Qt::Checked) // "选中"
+    {
+        this->encryption = true;
+    }
+    else // 未选中 - Qt::Unchecked
+    {
+        this->encryption = false;
+    }
+}
+
+void SearchData::on_pushButton_6_clicked()
+{
+    //定义文件对话框类
+    QFileDialog *fileDialog = new QFileDialog(this);
+    //定义文件对话框标题
+    fileDialog->setWindowTitle(QStringLiteral("选中THL文件"));
+    //设置默认文件路径
+    fileDialog->setDirectory(".");
+    //设置文件过滤器
+    fileDialog->setNameFilter(tr("File(*.THL)"));
+    //设置可以选择多个文件,默认为只能选择一个文件QFileDialog::ExistingFiles
+    fileDialog->setFileMode(QFileDialog::ExistingFiles);
+    //设置视图模式
+    fileDialog->setViewMode(QFileDialog::Detail);
+    //打印所有选择的文件的路径
+    QStringList fileNames;
+    if (fileDialog->exec()) {
+        fileNames = fileDialog->selectedFiles();
+        //QDate D; D=QDate::currentDate();
+        //QTime T; T=QTime::currentTime();
+        //QString bagname =QString("%1-%2-%3-%4-%5-%6").arg(D.year()).arg(D.month()).arg(D.day()).arg(T.hour()).arg(T.minute()).arg(T.second());//指定文件路径
+
+        for (auto aFile : fileNames) {
+            qDebug() << aFile.toStdString().substr(0, aFile.toStdString().find_last_of('/')).c_str();
+            huffDecode hd; hd.decode(aFile.toStdString().c_str(), aFile.toStdString().substr(0, aFile.toStdString().find_last_of('/')).c_str());
+        }
+    }
 }
