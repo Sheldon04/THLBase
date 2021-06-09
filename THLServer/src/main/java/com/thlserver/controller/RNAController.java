@@ -33,9 +33,24 @@ public class RNAController {
         return rnaService.findRNADetails(id);
     }
 
-    @GetMapping("findDiffExp")
-    public MicroRNA findDiffExp(String miR_name, String group) {
-        return rnaService.findDiffExp(miR_name, group);
+    @GetMapping("findDiffExpA")
+    public MicroRNA findDiffExpA(String miR_name) {
+        return rnaService.findDiffExpA(miR_name);
+    }
+
+    @GetMapping("findDiffExpB")
+    public MicroRNA findDiffExpB(String miR_name) {
+        return rnaService.findDiffExpB(miR_name);
+    }
+
+    @GetMapping("findDiffExpC")
+    public MicroRNA findDiffExpC(String miR_name) {
+        return rnaService.findDiffExpC(miR_name);
+    }
+
+    @GetMapping("findDiffExpD")
+    public MicroRNA findDiffExpD(String miR_name) {
+        return rnaService.findDiffExpD(miR_name);
     }
 
 }

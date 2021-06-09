@@ -18,11 +18,28 @@
         FROM thl_database.all_expressed_mirna
         WHERE miR_index LIKE #{index}
     </select>
-    <select id="findDiffExp" resultType="MicroRNA">
-        <bind name="miR_name" value="'%' + miR_name + '%'" />
-        <bind name="group" value="'%' + group + '%'" />
+    <select id="findDiffExpA" resultType="MicroRNA">
+        <bind name="miR_name" value="mirName" />
+        SELECT id as miR_index, miR_name_idx as miR_name, up_down, fold_change, `log2(fold_change)` as log2_fold_change, `pvalue` as p_value
+        FROM thl_database.spr3_vs_spr1
+        WHERE miR_name_idx = #{mirName}
+    </select>
+    <select id="findDiffExpB" resultType="MicroRNA">
+        <bind name="miR_name" value="mirName" />
+        SELECT id as miR_index, miR_name_idx as miR_name, up_down, fold_change, `log2(fold_change)` as log2_fold_change, `pvalue(t_test)` as p_value
+        FROM thl_database.sum1_vs_spr1
+        WHERE miR_name_idx = #{mirName}
+    </select>
+    <select id="findDiffExpC" resultType="MicroRNA">
+        <bind name="miR_name" value="mirName" />
         SELECT id as miR_index, miR_name_idx as miR_name, up_down, fold_change, `log2(fold_change)` as log2_fold_change, `pvalue(t_test)` as p_value
         FROM thl_database.sum1_vs_spr3
-        WHERE miR_name_idx = #{miR_name}
+        WHERE miR_name_idx = #{mirName}
+    </select>
+    <select id="findDiffExpD" resultType="MicroRNA">
+        <bind name="miR_name" value="mirName" />
+        SELECT id as miR_index, miR_name_idx as miR_name, up_down, fold_change, `log2(fold_change)` as log2_fold_change, `pvalue(t_test)` as p_value
+        FROM thl_database.sum1_vs_sum2
+        WHERE miR_name_idx = #{mirName}
     </select>
 </mapper>

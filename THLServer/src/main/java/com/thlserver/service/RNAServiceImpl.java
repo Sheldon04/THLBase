@@ -10,13 +10,14 @@ import java.util.List;
 
 @Service
 @Transactional
-public class RNAServiceImpl implements RNAService{
+public class RNAServiceImpl implements RNAService {
     private RNADao rnaDao;
 
-    @Autowired
-    public void setRnaDao (RNADao rnaDao) {
+    @Autowired(required = false)
+    public void setRnaDao(RNADao rnaDao) {
         this.rnaDao = rnaDao;
     }
+
     @Override
     public List<MicroRNA> findAll() {
         return rnaDao.findAll();
@@ -33,7 +34,23 @@ public class RNAServiceImpl implements RNAService{
     }
 
     @Override
-    public MicroRNA findDiffExp(String miR_name, String group) {
-        return rnaDao.findDiffExp(miR_name, group);
+    public MicroRNA findDiffExpA(String miR_name) {
+        return rnaDao.findDiffExpA(miR_name);
     }
+
+    @Override
+    public MicroRNA findDiffExpB(String miR_name) {
+        return rnaDao.findDiffExpB(miR_name);
+    }
+
+    @Override
+    public MicroRNA findDiffExpC(String miR_name) {
+        return rnaDao.findDiffExpC(miR_name);
+    }
+
+    @Override
+    public MicroRNA findDiffExpD(String miR_name) {
+        return rnaDao.findDiffExpD(miR_name);
+    }
+
 }
