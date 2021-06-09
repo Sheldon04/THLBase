@@ -122,7 +122,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .input {
   width: 300px;
 }
@@ -131,5 +131,12 @@ export default {
   position: absolute;
   top: 88px;
   left: 350px;
+}
+
+.table{
+  position: absolute;
+  top: 150px !important;
+  left: 30px !important;
+  width: 1400px !important;
 }
 </style>

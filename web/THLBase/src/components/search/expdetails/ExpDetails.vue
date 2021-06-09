@@ -328,7 +328,8 @@ export default {
       this.$router.push({
         path: key,
         query: {
-          id: this.$route.query.id
+          id: this.$route.query.id,
+          name: this.miR_name
         }
       })
     }
@@ -360,7 +361,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .details {
   position: absolute;
   left: 400px;
@@ -377,7 +378,7 @@ export default {
   width: 800px;
   top: 100px;
   left: 400px;
-  font-family: "Times New Roman";
+  font-family: "Times New Roman" !important;
 }
 .note{
   position: absolute;
@@ -386,8 +387,8 @@ export default {
   font-size: 18px;
 }
 .attr{
-  font-family: "Times New Roman";
-  font-size: 30px;
-  left: 20px;
+  font-family: "Times New Roman" !important;
+  font-size: 30px !important;
+  left: 20px !important;
 }
 </style>

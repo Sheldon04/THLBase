@@ -54,7 +54,6 @@ export default {
 #app {
 }
 .submenu-title{
-  font-family: "Trebuchet";
-  font-size: 18px;
+  font-size: 18px !important;
 }
 </style>

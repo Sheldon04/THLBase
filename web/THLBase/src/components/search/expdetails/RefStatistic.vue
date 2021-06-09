@@ -65,6 +65,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.navBar {
+  width: 250px;
+  position: absolute;
+}
 </style>
