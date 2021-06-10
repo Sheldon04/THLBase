@@ -160,7 +160,7 @@ export default {
   },
   created () {
     var keyWord = '?miR_name=' + this.$route.query.name
-    this.$http.get('http://localhost:8989/mirna/findDiffExpA' + keyWord).then(res => {
+    this.$http.get('http://47.106.148.74:8989/mirna/findDiffExpA' + keyWord).then(res => {
       this.miR_name = res.data['miR_name']
       let s1 = JSON.stringify(res.data, ['up_down', 'fold_change', 'log2_fold_change', 'p_value'])
       let json1 = JSON.parse(s1)
@@ -180,7 +180,7 @@ export default {
       this.p_value_2 = json1['p_value']
     })
 
-    this.$http.get('http://localhost:8989/mirna/findDiffExpC' + keyWord).then(res => {
+    this.$http.get('http://47.106.148.74:8989/mirna/findDiffExpC' + keyWord).then(res => {
       this.miR_name = res.data['miR_name']
       let s1 = JSON.stringify(res.data, ['up_down', 'fold_change', 'log2_fold_change', 'p_value'])
       let json1 = JSON.parse(s1)
@@ -190,7 +190,7 @@ export default {
       this.p_value_3 = json1['p_value']
     })
 
-    this.$http.get('http://localhost:8989/mirna/findDiffExpD' + keyWord).then(res => {
+    this.$http.get('http://47.106.148.74:8989/mirna/findDiffExpD' + keyWord).then(res => {
       this.miR_name = res.data['miR_name']
       let s1 = JSON.stringify(res.data, ['up_down', 'fold_change', 'log2_fold_change', 'p_value'])
       let json1 = JSON.parse(s1)
