@@ -94,7 +94,7 @@ export default {
     handleSearch () {
       var keyWord = 'findRNAByNameOrSeq?keyWord=' + this.input
       console.log(keyWord)
-      this.$http.get('http://localhost:8989/mirna/' + keyWord).then(res => {
+      this.$http.get('http://47.106.148.74:8989/mirna/' + keyWord).then(res => {
         this.tableData = res.data
         this.total = res.data.size
       })
@@ -113,7 +113,7 @@ export default {
     }
   },
   created () {
-    this.$http.get('http://localhost:8989/mirna/findAll').then(res => {
+    this.$http.get('http://47.106.148.74:8989/mirna/findAll').then(res => {
       this.tableData = res.data
       this.total = res.data.size
       this.loading = false

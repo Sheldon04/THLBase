@@ -15,4 +15,5 @@ public interface RNADao {
     MicroRNA findDiffExpB(@Param("mirName") String miR_name);
     MicroRNA findDiffExpC(@Param("mirName") String miR_name);
     MicroRNA findDiffExpD(@Param("mirName") String miR_name);
+    List<MicroRNA> findDiffExpTotal();
 }

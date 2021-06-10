@@ -337,7 +337,7 @@ export default {
   created () {
     var keyWord = '?id=' + this.$route.query.id
     console.log(keyWord)
-    this.$http.get('http://localhost:8989/mirna/findRNADetails' + keyWord).then(res => {
+    this.$http.get('http://47.106.148.74:8989/mirna/findRNADetails' + keyWord).then(res => {
       this.miR_name = res.data['miR_name']
       var s1 = JSON.stringify(res.data, ['sum11_r', 'sum12_r', 'sum13_r', 'sum14_r', 'sum15_r'])
       this.tableData1.push(JSON.parse(s1))

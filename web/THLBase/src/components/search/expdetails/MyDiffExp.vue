@@ -170,7 +170,7 @@ export default {
       this.p_value_1 = json1['p_value']
     })
 
-    this.$http.get('http://localhost:8989/mirna/findDiffExpB' + keyWord).then(res => {
+    this.$http.get('http://47.106.148.74:8989/mirna/findDiffExpB' + keyWord).then(res => {
       this.miR_name = res.data['miR_name']
       let s1 = JSON.stringify(res.data, ['up_down', 'fold_change', 'log2_fold_change', 'p_value'])
       let json1 = JSON.parse(s1)

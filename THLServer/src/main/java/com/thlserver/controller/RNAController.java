@@ -53,4 +53,9 @@ public class RNAController {
         return rnaService.findDiffExpD(miR_name);
     }
 
+    @GetMapping("findDiffExpTotal")
+    public List<MicroRNA> findDiffExpTotal() {
+        return rnaService.findDiffExpTotal();
+    }
+
 }

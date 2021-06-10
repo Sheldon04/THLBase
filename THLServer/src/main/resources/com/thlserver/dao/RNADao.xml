@@ -42,4 +42,8 @@
         FROM thl_database.sum1_vs_sum2
         WHERE miR_name_idx = #{mirName}
     </select>
+    <select id="findDiffExpTotal" resultType="MicroRNA">
+        select id as miR_index, miR_name, miR_seq, `pvalue(ANOVA)` as p_value
+        from thl_database.sum1_sum2_spr1_spr3
+    </select>
 </mapper>

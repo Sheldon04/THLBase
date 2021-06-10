@@ -53,4 +53,9 @@ public class RNAServiceImpl implements RNAService {
         return rnaDao.findDiffExpD(miR_name);
     }
 
+    @Override
+    public List<MicroRNA> findDiffExpTotal() {
+        return rnaDao.findDiffExpTotal();
+    }
+
 }

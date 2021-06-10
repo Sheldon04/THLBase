@@ -16,6 +16,7 @@ public interface RNAService {
     MicroRNA findDiffExpB(String miR_name);
     MicroRNA findDiffExpC(String miR_name);
     MicroRNA findDiffExpD(String miR_name);
+    List<MicroRNA> findDiffExpTotal();
 
 
 }
