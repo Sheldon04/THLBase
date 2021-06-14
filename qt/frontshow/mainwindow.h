@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "global.h"
+#include "databasemanager.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

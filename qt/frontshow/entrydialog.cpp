@@ -30,11 +30,21 @@ void EntryDialog::on_pushButton_clicked()
     // 获得字符串
     QString idStr = ui->lineEdit->text();
     QString passWordStr = ui->lineEdit_2->text();
+    QString pass;
 
     // 如果用户名和密码一致 则进入系统
+    if ( !DataBaseManager::getPassword(idStr, pass))
+    {
+        QMessageBox::warning(this, "Warning", "The id does not exist, please register first");
+        return;
+    }
+    else if (passWordStr.compare(pass) != 0)
+    {
+        QMessageBox::warning(this, "Warning", "The password is not correct" + pass);
+        return;
+    }
 
-    // 如果没有一致的用户名和密码  提示输入错误
-
+    // 显示登录界面
     UserWindow* newDialog = new UserWindow();
     newDialog->show();
     emit hideWindow();

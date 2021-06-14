@@ -7,6 +7,7 @@
 #include <QObject>
 #include "global.h"
 #include "oneSearchInfo.h"
+#include "diffexpinfoitem.h"
 
 class DataBaseManager : public QObject
 {
@@ -38,6 +39,11 @@ public:
 
     static int deleteRecords(const std::vector<QString> &dItemNames);
 
+    static bool searchDiffExpInfo(QString mir_name_seq, std::vector<DiffExpInfoItem> &ret, int mode);
+
+    static bool getPassword(QString id, QString &password);
+
+public:
     static DataBaseManager* getInstance()
     {
         if(instance == NULL)

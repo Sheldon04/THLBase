@@ -43,7 +43,8 @@ HEADERS += \
     searchdata.h \
     databasemanager.h \
     global.h \
-    userwindow.h
+    userwindow.h \
+    diffexpinfoitem.h
 
 FORMS += \
     aboutusdialog.ui \
