@@ -28,7 +28,9 @@ SOURCES += \
     register.cpp \
     searchdata.cpp \
     databasemanager.cpp \
-    userwindow.cpp
+    userwindow.cpp \
+    service.cpp \
+    avltree.cpp
 
 HEADERS += \
     aboutusdialog.h \
@@ -44,7 +46,9 @@ HEADERS += \
     databasemanager.h \
     global.h \
     userwindow.h \
-    diffexpinfoitem.h
+    diffexpinfoitem.h \
+    service.h \
+    avltree.h
 
 FORMS += \
     aboutusdialog.ui \

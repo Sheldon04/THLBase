@@ -31,6 +31,51 @@ public:
         this->expression_level = expression_level;
     }
 
+    oneSearchInfo(const oneSearchInfo & info)
+    {
+        this->miR_index = info.miR_index;
+        this->miR_name = info.miR_name;
+        this->miR_seq = info.miR_seq;
+        this->rep_miRIDl = info.rep_miRIDl;
+        this->miRbase_seq = info.miRbase_seq;
+        this->type = info.type;
+        this->CG = info.CG;
+        this->dG = info.dG;
+        this->sum1_raw = info.sum1_raw;
+        this->sum2_raw = info.sum2_raw;
+        this->spr1_raw = info.spr1_raw;
+        this->spr3_raw = info.spr3_raw;
+        this->sum1_norm = info.sum1_norm;
+        this->sum2_norm = info.sum2_norm;
+        this->spr1_norm = info.spr1_norm;
+        this->spr3_norm = info.spr3_norm;
+        this->expression_level = info.expression_level;
+    }
+
+    oneSearchInfo & operator=(const oneSearchInfo & info)
+    {
+        if (this == &info)
+            return *this;
+        this->miR_index = info.miR_index;
+        this->miR_name = info.miR_name;
+        this->miR_seq = info.miR_seq;
+        this->rep_miRIDl = info.rep_miRIDl;
+        this->miRbase_seq = info.miRbase_seq;
+        this->type = info.type;
+        this->CG = info.CG;
+        this->dG = info.dG;
+        this->sum1_raw = info.sum1_raw;
+        this->sum2_raw = info.sum2_raw;
+        this->spr1_raw = info.spr1_raw;
+        this->spr3_raw = info.spr3_raw;
+        this->sum1_norm = info.sum1_norm;
+        this->sum2_norm = info.sum2_norm;
+        this->spr1_norm = info.spr1_norm;
+        this->spr3_norm = info.spr3_norm;
+        this->expression_level = info.expression_level;
+        return *this;
+    }
+
     QString miR_index;
     QString miR_name;
     QString miR_seq;

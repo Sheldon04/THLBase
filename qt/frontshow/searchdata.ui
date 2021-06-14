@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>20</y>
+     <y>30</y>
      <width>61</width>
      <height>20</height>
     </rect>
@@ -29,44 +29,18 @@
   <widget class="QLineEdit" name="lineEdit">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>20</y>
+     <x>220</x>
+     <y>30</y>
      <width>113</width>
      <height>20</height>
     </rect>
-   </property>
-  </widget>
-  <widget class="QRadioButton" name="radioButton">
-   <property name="geometry">
-    <rect>
-     <x>160</x>
-     <y>60</y>
-     <width>89</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>miR_name</string>
-   </property>
-  </widget>
-  <widget class="QRadioButton" name="radioButton_2">
-   <property name="geometry">
-    <rect>
-     <x>270</x>
-     <y>60</y>
-     <width>89</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>miR_seq</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
      <x>380</x>
-     <y>20</y>
+     <y>30</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -78,10 +52,10 @@
   <widget class="QTableWidget" name="tableWidget">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>90</y>
-     <width>661</width>
-     <height>431</height>
+     <x>20</x>
+     <y>150</y>
+     <width>741</width>
+     <height>411</height>
     </rect>
    </property>
    <property name="textElideMode">
@@ -307,7 +281,7 @@
    <property name="geometry">
     <rect>
      <x>470</x>
-     <y>20</y>
+     <y>30</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -333,7 +307,7 @@
    <property name="geometry">
     <rect>
      <x>570</x>
-     <y>20</y>
+     <y>30</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -342,24 +316,11 @@
     <string>Delete</string>
    </property>
   </widget>
-  <widget class="QCheckBox" name="checkBox">
-   <property name="geometry">
-    <rect>
-     <x>370</x>
-     <y>60</y>
-     <width>71</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Modify</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="pushButton_4">
    <property name="geometry">
     <rect>
      <x>670</x>
-     <y>20</y>
+     <y>30</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -381,60 +342,202 @@
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_5">
+  <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
      <x>470</x>
      <y>60</y>
-     <width>75</width>
-     <height>23</height>
+     <width>271</width>
+     <height>51</height>
     </rect>
    </property>
-   <property name="text">
-    <string>DownLoad</string>
+   <property name="title">
+    <string>Export</string>
    </property>
+   <widget class="QPushButton" name="pushButton_5">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>20</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>DownLoad</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBox_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>encryption</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_6">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>20</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Decode</string>
+    </property>
+   </widget>
   </widget>
-  <widget class="QCheckBox" name="checkBox_2">
+  <widget class="QGroupBox" name="groupBox_2">
    <property name="geometry">
     <rect>
-     <x>570</x>
-     <y>65</y>
-     <width>81</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>encryption</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_6">
-   <property name="geometry">
-    <rect>
-     <x>670</x>
+     <x>150</x>
      <y>60</y>
-     <width>75</width>
-     <height>23</height>
+     <width>281</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Search mode</string>
+   </property>
+   <widget class="QRadioButton" name="radioButton_2">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>20</y>
+      <width>89</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>miR_seq</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>20</y>
+      <width>89</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>miR_name</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>60</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Modify</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Search mode</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>45</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Sort key</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>40</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>miR_index</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>miR_name</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>CG</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>dG</string>
+     </property>
+    </item>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="bt_detail">
+   <property name="geometry">
+    <rect>
+     <x>650</x>
+     <y>120</y>
+     <width>91</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="text">
-    <string>Decode</string>
+    <string>See details</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="line_name">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>120</y>
+     <width>171</width>
+     <height>20</height>
+    </rect>
    </property>
   </widget>
   <zorder>movieLabel</zorder>
   <zorder>label_2</zorder>
   <zorder>lineEdit</zorder>
-  <zorder>radioButton</zorder>
-  <zorder>radioButton_2</zorder>
   <zorder>pushButton</zorder>
   <zorder>tableWidget</zorder>
   <zorder>pushButton_2</zorder>
   <zorder>pushButton_3</zorder>
-  <zorder>checkBox</zorder>
   <zorder>pushButton_4</zorder>
   <zorder>stateLabel</zorder>
-  <zorder>pushButton_5</zorder>
-  <zorder>checkBox_2</zorder>
-  <zorder>pushButton_6</zorder>
+  <zorder>groupBox</zorder>
+  <zorder>groupBox_2</zorder>
+  <zorder>bt_detail</zorder>
+  <zorder>line_name</zorder>
  </widget>
  <resources/>
  <connections/>
