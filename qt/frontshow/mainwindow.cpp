@@ -26,10 +26,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->pushButton_3->setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px;");
 
     DataBaseManager::init();
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 }
 
 MainWindow::~MainWindow()

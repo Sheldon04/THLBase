@@ -229,11 +229,7 @@ bool DataBaseManager::searchDiffExpInfo(QString mir_name_seq, std::vector<DiffEx
     int cnt = 0;
     // 从数据库中查询景点信息
     QSqlQuery qsQuery = QSqlQuery(db);
-<<<<<<< Updated upstream
-    QString strSqlText("SELECT * FROM thl_database.all_expressed_mirna WHERE miR_name LIKE '%" + mir_name_seq + "%'");//查询语法
-=======
     QString strSqlText;//查询语法
->>>>>>> Stashed changes
     strSqlText = mode == 0 ? "SELECT * FROM thl_database.sum1_sum2_spr1_spr3 WHERE miR_name LIKE '%" + mir_name_seq + "%'" :
                              "SELECT * FROM thl_database.sum1_sum2_spr1_spr3 WHERE miR_seq LIKE '%" + mir_name_seq + "%'";
     qsQuery.prepare(strSqlText);
@@ -245,12 +241,6 @@ bool DataBaseManager::searchDiffExpInfo(QString mir_name_seq, std::vector<DiffEx
         find = true;
         cnt++;
     }
-
-<<<<<<< Updated upstream
-=======
-    qDebug() << "查找结束，找到" << cnt <<" 条记录，用时" << time.elapsed() << "ms" << endl;
-
->>>>>>> Stashed changes
     return true;
 }
 
@@ -260,18 +250,13 @@ bool DataBaseManager::getPassword(QString id, QString &password)
     // 从数据库中查询景点信息
     QSqlQuery qsQuery = QSqlQuery(db);
     QString strSqlText;//查询语法
-    strSqlText = "SELECT * FROM thl_database.register_info WHERE account_name = '" + id + "'";
+    strSqlText = "SELECT password FROM thl_database.register_info WHERE user_id = '" + id + "'";
     qsQuery.prepare(strSqlText);
     qsQuery.exec();
     if (qsQuery.next()) //依次取出查询结果的每一条记录，直至结束
     {
-<<<<<<< Updated upstream
-        password = qsQuery.value(2).toString();
+        password = qsQuery.value(0).toString();
         find = true;
-=======
-        find = true;
-        password = qsQuery.value(2).toString();
->>>>>>> Stashed changes
     }
 
     return find;

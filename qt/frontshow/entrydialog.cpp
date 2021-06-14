@@ -40,11 +40,7 @@ void EntryDialog::on_pushButton_clicked()
     }
     else if (passWordStr.compare(pass) != 0)
     {
-<<<<<<< Updated upstream
         QMessageBox::warning(this, "Warning", "The password is not correct" + pass);
-=======
-        QMessageBox::warning(this, "Warning", "The password is not correct");
->>>>>>> Stashed changes
         return;
     }
 
