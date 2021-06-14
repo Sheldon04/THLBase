@@ -103,7 +103,8 @@ export default {
       this.$router.push({
         path: '/search1/details',
         query: {
-          id: row.miR_index
+          id: row.miR_index,
+          name: row.miR_name
         }
       })
     },
