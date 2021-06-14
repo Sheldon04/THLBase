@@ -15,10 +15,17 @@ public:
     }
 
 private:
+<<<<<<< Updated upstream
     QString id;
     QString mir_name;
     QString mir_seq;
     QString p_value;
+=======
+    QString mir_name;
+    QString mir_seq;
+    QString p_value;
+    QString id;
+>>>>>>> Stashed changes
 };
 
 #endif // DIFFEXPINFOITEM_H

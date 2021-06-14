@@ -38,6 +38,8 @@ private:
 
     QWidget * generateTotalChart();
 
+    QWidget * generateDiffExpChart(QString mir_name);
+
     QChartView * generateLensChart(std::map<int, int> lens);
 
     QChartView * generateTypeChart(std::map<int, int> type);
