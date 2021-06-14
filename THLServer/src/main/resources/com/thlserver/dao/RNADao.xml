@@ -46,4 +46,9 @@
         select id as miR_index, miR_name, miR_seq, `pvalue(ANOVA)` as p_value
         from thl_database.sum1_sum2_spr1_spr3
     </select>
+    <select id="findIdByName" resultType="String">
+        SELECT miR_index
+        FROM thl_database.all_expressed_mirna
+        WHERE miR_name = #{miR_Name}
+    </select>
 </mapper>

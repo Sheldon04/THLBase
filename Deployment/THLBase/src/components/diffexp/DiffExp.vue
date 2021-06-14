@@ -58,6 +58,7 @@ export default {
   name: 'DiffExp',
   data () {
     return {
+      info: [],
       tableData: [],
       loading: true,
       state: '',
@@ -87,11 +88,17 @@ export default {
       })
     },
     handleClick (row) {
-      this.$router.push({
-        path: '/search1/details/mydiffexp',
-        query: {
-          name: row.miR_name
-        }
+      console.log('http://47.106.148.74:8989/mirna/findIdByName?miR_name=' + row.miR_name)
+      this.$http.get('http://47.106.148.74:8989/mirna/findIdByName?miR_name=' + row.miR_name).then(res => {
+        this.info = res.data
+        console.log(this.info[0])
+        this.$router.push({
+          path: '/search1/details/mydiffexp',
+          query: {
+            id: this.info[0],
+            name: row.miR_name
+          }
+        })
       })
     },
     filterHandler (value, row, column) {

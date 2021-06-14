@@ -58,4 +58,9 @@ public class RNAServiceImpl implements RNAService {
         return rnaDao.findDiffExpTotal();
     }
 
+    @Override
+    public List<String> findIdByName(String miR_name) {
+        return rnaDao.findIdByName(miR_name);
+    }
+
 }

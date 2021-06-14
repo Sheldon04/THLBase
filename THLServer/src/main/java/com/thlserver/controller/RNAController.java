@@ -58,4 +58,9 @@ public class RNAController {
         return rnaService.findDiffExpTotal();
     }
 
+    @GetMapping("findIdByName")
+    public List<String> findIdByName(String miR_name){
+        return rnaService.findIdByName(miR_name);
+    }
+
 }
