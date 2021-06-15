@@ -30,10 +30,17 @@
           </ul>
         </el-collapse-item>
         <el-collapse-item title="How to use" name="3" class="step">
-          <div>你猜</div>
+          <div>
+            <ui>
+              <li>You can search expression data from 'Search'</li>
+              <li>You can search differential expression data from 'Defferent Expression'</li>
+              <li>If you need more information about a specific microRNA, you can click 'more' to get more info</li>
+              <li>You can select 'More'-'Related List' to getRelated literature about the specific miRNA</li>
+            </ui>
+          </div>
         </el-collapse-item>
         <el-collapse-item title="How to cite" name="4" class="step">
-          <div>你猜</div>
+          <div>...</div>
         </el-collapse-item>
       </el-collapse>
     </div>
