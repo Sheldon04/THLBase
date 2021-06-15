@@ -3,6 +3,8 @@
 #include "addrecord.h"
 #include "databasemanager.h"
 #include "datavisualize.h"
+#include "httptrace.h"
+#include "env.h"
 #include <QMovie>
 
 #include "userwindow.h"
@@ -25,6 +27,8 @@ UserWindow::UserWindow(QWidget *parent) :
     ui->tabWidget->addTab(new DataVisualize(), "Data Visualization");
     ui->tabWidget->addTab(new SearchData(), "Search");
     ui->tabWidget->addTab(new AddRecord(), "Add Record");
+    ui->tabWidget->addTab(new Httptrace(), "httptrace");
+    ui->tabWidget->addTab(new Env(), "env");
     ui->tabWidget->setLayout(new QGridLayout());
 
     this->dbMgr = new DataBaseManager();

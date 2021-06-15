@@ -1,6 +1,7 @@
 QT       += core gui
 QT += charts
 QT       += sql
+QT += network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
@@ -23,6 +24,8 @@ SOURCES += \
     baseEncode.cpp \
     datavisualize.cpp \
     entrydialog.cpp \
+    env.cpp \
+    httptrace.cpp \
     main.cpp \
     mainwindow.cpp \
     register.cpp \
@@ -38,6 +41,8 @@ HEADERS += \
     baseEncode.h \
     datavisualize.h \
     entrydialog.h \
+    env.h \
+    httptrace.h \
     huffTree.h \
     mainwindow.h \
     oneSearchInfo.h \
@@ -55,6 +60,8 @@ FORMS += \
     addrecord.ui \
     datavisualize.ui \
     entrydialog.ui \
+    env.ui \
+    httptrace.ui \
     mainwindow.ui \
     register.ui \
     searchdata.ui \
