@@ -7,8 +7,11 @@
 #include <QMenu>
 #include <QAction>
 #include <QTableWidgetSelectionRange>
+#include <QInputDialog>
 #include "global.h"
 #include "databasemanager.h"
+#include "service.h"
+#include "avltree.h"
 
 using std::vector;
 namespace Ui {
@@ -48,11 +51,19 @@ private slots:
 
     void on_pushButton_6_clicked();
 
+    void updateExpInfoTable();
+
+    void on_comboBox_currentIndexChanged(int index);
+
+    void on_bt_detail_clicked();
+
 private:
     Ui::SearchData *ui;
     QButtonGroup *bg;
 
     vector<oneSearchInfo> searchResult;
+
+    AVLTree * avl_t = new AVLTree();
 
     std::map<QString, std::map<QString, QString> > modifyBuffer;
 
@@ -62,6 +73,7 @@ private:
 
     // debug
     void show();
+
 
 public:
     bool MIR_NamesFromDB(QString partStr, vector<oneSearchInfo> &resultInfos);

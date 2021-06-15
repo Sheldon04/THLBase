@@ -1,7 +1,9 @@
-#ifndef REGISTER_H
+﻿#ifndef REGISTER_H
 #define REGISTER_H
 
 #include <QDialog>
+#include <QMessageBox>
+#include "databasemanager.h"
 
 namespace Ui {
 class Register;

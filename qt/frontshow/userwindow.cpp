@@ -22,8 +22,6 @@ UserWindow::UserWindow(QWidget *parent) :
 //    ui->pushButton->setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px;");
 //    ui->pushButton_3->setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px;");
 //        ui->pushButton_2->setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px;");
-
-    DataBaseManager::init();
     ui->tabWidget->addTab(new DataVisualize(), "Data Visualization");
     ui->tabWidget->addTab(new SearchData(), "Search");
     ui->tabWidget->addTab(new AddRecord(), "Add Record");

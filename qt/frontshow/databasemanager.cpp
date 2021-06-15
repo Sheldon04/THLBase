@@ -220,3 +220,44 @@ int DataBaseManager::deleteRecords(const std::vector<QString> &dItemNames)
     else qDebug() << "Success" << endl;
     return time.elapsed();
 }
+
+bool DataBaseManager::searchDiffExpInfo(QString mir_name_seq, std::vector<DiffExpInfoItem> &ret, int mode)
+{
+    QTime time;
+    time.start();
+    bool find = false;
+    int cnt = 0;
+    // 从数据库中查询景点信息
+    QSqlQuery qsQuery = QSqlQuery(db);
+    QString strSqlText;//查询语法
+    strSqlText = mode == 0 ? "SELECT * FROM thl_database.sum1_sum2_spr1_spr3 WHERE miR_name LIKE '%" + mir_name_seq + "%'" :
+                             "SELECT * FROM thl_database.sum1_sum2_spr1_spr3 WHERE miR_seq LIKE '%" + mir_name_seq + "%'";
+    qsQuery.prepare(strSqlText);
+    qsQuery.exec();
+    while (qsQuery.next()) //依次取出查询结果的每一条记录，直至结束
+    {
+        DiffExpInfoItem temp(qsQuery.value(0).toString(), qsQuery.value(1).toString(), qsQuery.value(2).toString(), qsQuery.value(3).toString());
+        ret.push_back(temp);
+        find = true;
+        cnt++;
+    }
+    return true;
+}
+
+bool DataBaseManager::getPassword(QString id, QString &password)
+{
+    bool find = false;
+    // 从数据库中查询景点信息
+    QSqlQuery qsQuery = QSqlQuery(db);
+    QString strSqlText;//查询语法
+    strSqlText = "SELECT password FROM thl_database.register_info WHERE user_id = '" + id + "'";
+    qsQuery.prepare(strSqlText);
+    qsQuery.exec();
+    if (qsQuery.next()) //依次取出查询结果的每一条记录，直至结束
+    {
+        password = qsQuery.value(0).toString();
+        find = true;
+    }
+
+    return find;
+}

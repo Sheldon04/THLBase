@@ -36,6 +36,9 @@ SearchData::SearchData(QWidget *parent) :
 
     ui->tableWidget->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->tableWidget,SIGNAL(customContextMenuRequested(QPoint)),this,SLOT(show_menu(QPoint)));
+
+    ui->bt_detail->setVisible(false);
+    ui->line_name->setVisible(false);
 }
 
 SearchData::~SearchData()
@@ -47,6 +50,8 @@ SearchData::~SearchData()
 // 确认按钮  开始查找
 void SearchData::on_pushButton_clicked()
 {
+//    std::vector<oneSearchInfo>().swap(this->searchResult);
+    this->searchResult.clear();
     // 获取当前输入文本
     QString searchStr = ui->lineEdit->text();
     int sel= bg->checkedId();//取到所选的radioButton的值
@@ -55,17 +60,11 @@ void SearchData::on_pushButton_clicked()
     {
     case 0:
         // 查找miR_name
-        //qDebug() << "miR_name" << endl;
-
-        // 注意 这里涉及到大数组的拷贝 可能会影响程序运行速度  建议把函数内的内容直接写这里
         MIR_NamesFromDB(searchStr, searchResult);
 
         break;
     case 1:
         // 查找miR_seq
-        //qDebug() << "miR_seq" << endl;
-
-        // 注意 这里涉及到大数组的拷贝 可能会影响程序运行速度  建议把函数内的内容直接写这里
         MIR_SeqFromDB(searchStr, searchResult);
         break;
     default:
@@ -78,60 +77,72 @@ void SearchData::on_pushButton_clicked()
     if (searchResult.size() == 0) { // 如果数组大小为空
 
     } else { // 数组不为空  含有查找信息
-        // 将查找信息呈现并统计
+        updateExpInfoTable();
+        this->avl_t->destroy();
         for (size_t i = 0; i < searchResult.size(); i++) {
-            ui->tableWidget->setItem(int(i), 0, new QTableWidgetItem(searchResult[i].miR_index));
-            ui->tableWidget->setItem(int(i), 1, new QTableWidgetItem(searchResult[i].miR_name));
-            ui->tableWidget->setItem(int(i), 2, new QTableWidgetItem(searchResult[i].miR_seq));
-            ui->tableWidget->setItem(int(i), 3, new QTableWidgetItem(searchResult[i].rep_miRIDl));
-            ui->tableWidget->setItem(int(i), 4, new QTableWidgetItem(searchResult[i].miRbase_seq));
-            ui->tableWidget->setItem(int(i), 5, new QTableWidgetItem(searchResult[i].type));
-            ui->tableWidget->setItem(int(i), 6, new QTableWidgetItem(searchResult[i].CG));
-            ui->tableWidget->setItem(int(i), 7, new QTableWidgetItem(searchResult[i].dG));
-
-            int numLabel = 8;
-            for (size_t m = 0; m < searchResult[i].sum1_raw.size(); m++) {
-                ui->tableWidget->setItem(int(i), int(numLabel+m), new QTableWidgetItem(searchResult[i].sum1_raw[m]));
-            }
-            numLabel = numLabel + int(searchResult[i].sum1_raw.size());
-
-            for (size_t m = 0; m < searchResult[i].sum2_raw.size(); m++) {
-                ui->tableWidget->setItem(int(i), int(numLabel+m), new QTableWidgetItem(searchResult[i].sum2_raw[m]));
-            }
-            numLabel = numLabel + int(searchResult[i].sum2_raw.size());
-
-            for (size_t m = 0; m < searchResult[i].spr1_raw.size(); m++) {
-                ui->tableWidget->setItem(int(i), int(numLabel+m), new QTableWidgetItem(searchResult[i].spr1_raw[m]));
-            }
-            numLabel = numLabel + int(searchResult[i].spr1_raw.size());
-
-            for (size_t m = 0; m < searchResult[i].spr3_raw.size(); m++) {
-                ui->tableWidget->setItem(int(i), int(numLabel+m), new QTableWidgetItem(searchResult[i].spr3_raw[m]));
-            }
-            numLabel = numLabel + int(searchResult[i].spr3_raw.size());
-
-            for (size_t m = 0; m < searchResult[i].sum1_norm.size(); m++) {
-                ui->tableWidget->setItem(int(i), int(numLabel+m), new QTableWidgetItem(searchResult[i].sum1_norm[m]));
-            }
-            numLabel = numLabel + int(searchResult[i].sum1_norm.size());
-
-            for (size_t m = 0; m < searchResult[i].sum2_norm.size(); m++) {
-                ui->tableWidget->setItem(int(i), int(numLabel+m), new QTableWidgetItem(searchResult[i].sum2_norm[m]));
-            }
-            numLabel = numLabel + int(searchResult[i].sum2_norm.size());
-
-            for (size_t m = 0; m < searchResult[i].spr1_norm.size(); m++) {
-                ui->tableWidget->setItem(int(i), int(numLabel+m), new QTableWidgetItem(searchResult[i].spr1_norm[m]));
-            }
-            numLabel = numLabel + int(searchResult[i].spr1_norm.size());
-
-            for (size_t m = 0; m < searchResult[i].spr3_norm.size(); m++) {
-                ui->tableWidget->setItem(int(i), int(numLabel+m), new QTableWidgetItem(searchResult[i].spr3_norm[m]));
-            }
-            numLabel = numLabel + int(searchResult[i].spr3_norm.size());
-
-            ui->tableWidget->setItem(int(i), numLabel, new QTableWidgetItem(searchResult[i].expression_level));
+            this->avl_t->insert(this->searchResult[i].miR_name, i);
         }
+        ui->bt_detail->setVisible(true);
+        ui->line_name->setVisible(true);
+    }
+}
+
+
+void SearchData::updateExpInfoTable()
+{
+    // 将查找信息呈现并统计
+    for (size_t i = 0; i < searchResult.size(); i++) {
+        ui->tableWidget->setItem(int(i), 0, new QTableWidgetItem(searchResult[i].miR_index));
+        ui->tableWidget->setItem(int(i), 1, new QTableWidgetItem(searchResult[i].miR_name));
+        ui->tableWidget->setItem(int(i), 2, new QTableWidgetItem(searchResult[i].miR_seq));
+        ui->tableWidget->setItem(int(i), 3, new QTableWidgetItem(searchResult[i].rep_miRIDl));
+        ui->tableWidget->setItem(int(i), 4, new QTableWidgetItem(searchResult[i].miRbase_seq));
+        ui->tableWidget->setItem(int(i), 5, new QTableWidgetItem(searchResult[i].type));
+        ui->tableWidget->setItem(int(i), 6, new QTableWidgetItem(searchResult[i].CG));
+        ui->tableWidget->setItem(int(i), 7, new QTableWidgetItem(searchResult[i].dG));
+
+        int numLabel = 8;
+        for (size_t m = 0; m < searchResult[i].sum1_raw.size(); m++) {
+            ui->tableWidget->setItem(int(i), int(numLabel+m), new QTableWidgetItem(searchResult[i].sum1_raw[m]));
+        }
+        numLabel = numLabel + int(searchResult[i].sum1_raw.size());
+
+        for (size_t m = 0; m < searchResult[i].sum2_raw.size(); m++) {
+            ui->tableWidget->setItem(int(i), int(numLabel+m), new QTableWidgetItem(searchResult[i].sum2_raw[m]));
+        }
+        numLabel = numLabel + int(searchResult[i].sum2_raw.size());
+
+        for (size_t m = 0; m < searchResult[i].spr1_raw.size(); m++) {
+            ui->tableWidget->setItem(int(i), int(numLabel+m), new QTableWidgetItem(searchResult[i].spr1_raw[m]));
+        }
+        numLabel = numLabel + int(searchResult[i].spr1_raw.size());
+
+        for (size_t m = 0; m < searchResult[i].spr3_raw.size(); m++) {
+            ui->tableWidget->setItem(int(i), int(numLabel+m), new QTableWidgetItem(searchResult[i].spr3_raw[m]));
+        }
+        numLabel = numLabel + int(searchResult[i].spr3_raw.size());
+
+        for (size_t m = 0; m < searchResult[i].sum1_norm.size(); m++) {
+            ui->tableWidget->setItem(int(i), int(numLabel+m), new QTableWidgetItem(searchResult[i].sum1_norm[m]));
+        }
+        numLabel = numLabel + int(searchResult[i].sum1_norm.size());
+
+        for (size_t m = 0; m < searchResult[i].sum2_norm.size(); m++) {
+            ui->tableWidget->setItem(int(i), int(numLabel+m), new QTableWidgetItem(searchResult[i].sum2_norm[m]));
+        }
+        numLabel = numLabel + int(searchResult[i].sum2_norm.size());
+
+        for (size_t m = 0; m < searchResult[i].spr1_norm.size(); m++) {
+            ui->tableWidget->setItem(int(i), int(numLabel+m), new QTableWidgetItem(searchResult[i].spr1_norm[m]));
+        }
+        numLabel = numLabel + int(searchResult[i].spr1_norm.size());
+
+        for (size_t m = 0; m < searchResult[i].spr3_norm.size(); m++) {
+            ui->tableWidget->setItem(int(i), int(numLabel+m), new QTableWidgetItem(searchResult[i].spr3_norm[m]));
+        }
+        numLabel = numLabel + int(searchResult[i].spr3_norm.size());
+
+        ui->tableWidget->setItem(int(i), numLabel, new QTableWidgetItem(searchResult[i].expression_level));
     }
 }
 
@@ -146,7 +157,7 @@ bool SearchData::MIR_NamesFromDB(QString partStr, vector<oneSearchInfo> &resultI
 // 通过miR_seq 的一部分来从数据库中查找所有有可能的值并返回
 bool SearchData::MIR_SeqFromDB(QString partStr, vector<oneSearchInfo> &resultInfos) {
     QString info = DataBaseManager::searchAllInfo(partStr, resultInfos, 1);
-    ui->stateLabel->setText(info);////////////////////
+    ui->stateLabel->setText(info);
     return true;
 }
 
@@ -157,6 +168,8 @@ void SearchData::on_pushButton_2_clicked()
     ui->checkBox->setCheckState(Qt::Unchecked);
     std::map<QString, std::map<QString, QString> > temp;
     this->modifyBuffer.swap(temp);
+    ui->bt_detail->setVisible(false);
+    ui->line_name->setVisible(false);
 }
 
 void SearchData::on_pushButton_3_clicked()
@@ -233,11 +246,6 @@ void SearchData::on_pushButton_4_clicked()
 {
 //    show();
     DataBaseManager::modifyData(this->modifyBuffer);
-//    QList<QTableWidgetSelectionRange> temp = ui->tableWidget->selectedRanges();
-//    for (QTableWidgetSelectionRange i : temp)
-//    {
-//        qDebug() << "top: " << i.topRow() << " bottom: " << i.bottomRow() << endl;
-//    }
 }
 
 void SearchData::on_tableWidget_cellClicked(int row, int column)
@@ -419,4 +427,36 @@ void SearchData::on_pushButton_6_clicked()
             huffDecode hd; hd.decode(aFile.toStdString().c_str(), aFile.toStdString().substr(0, aFile.toStdString().find_last_of('/')).c_str());
         }
     }
+}
+
+void SearchData::on_comboBox_currentIndexChanged(int index)
+{
+    switch (index) {
+    case 0:
+        Service::quicksort(this->searchResult, ID);
+        break;
+    case 1:
+        Service::quicksort(this->searchResult, MIR_NAME);
+        break;
+    case 2:
+        Service::quicksort(this->searchResult, CG);
+        break;
+    case 3:
+        Service::quicksort(this->searchResult, DG);
+        break;
+    }
+    updateExpInfoTable();
+}
+
+void SearchData::on_bt_detail_clicked()
+{
+    QString name = ui->line_name->text();
+    if (name.compare("") == 0) return;
+    int idx = this->avl_t->search(name);
+    if (idx == -1)
+    {
+        QMessageBox::information(this, "Infomation", "MiRNA " + name + " is not found in current results.");
+        return;
+    }
+    // TODO
 }

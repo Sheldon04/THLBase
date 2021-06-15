@@ -31,6 +31,51 @@ public:
         this->expression_level = expression_level;
     }
 
+    oneSearchInfo(const oneSearchInfo & info)
+    {
+        this->miR_index = info.miR_index;
+        this->miR_name = info.miR_name;
+        this->miR_seq = info.miR_seq;
+        this->rep_miRIDl = info.rep_miRIDl;
+        this->miRbase_seq = info.miRbase_seq;
+        this->type = info.type;
+        this->CG = info.CG;
+        this->dG = info.dG;
+        this->sum1_raw = info.sum1_raw;
+        this->sum2_raw = info.sum2_raw;
+        this->spr1_raw = info.spr1_raw;
+        this->spr3_raw = info.spr3_raw;
+        this->sum1_norm = info.sum1_norm;
+        this->sum2_norm = info.sum2_norm;
+        this->spr1_norm = info.spr1_norm;
+        this->spr3_norm = info.spr3_norm;
+        this->expression_level = info.expression_level;
+    }
+
+    oneSearchInfo & operator=(const oneSearchInfo & info)
+    {
+        if (this == &info)
+            return *this;
+        this->miR_index = info.miR_index;
+        this->miR_name = info.miR_name;
+        this->miR_seq = info.miR_seq;
+        this->rep_miRIDl = info.rep_miRIDl;
+        this->miRbase_seq = info.miRbase_seq;
+        this->type = info.type;
+        this->CG = info.CG;
+        this->dG = info.dG;
+        this->sum1_raw = info.sum1_raw;
+        this->sum2_raw = info.sum2_raw;
+        this->spr1_raw = info.spr1_raw;
+        this->spr3_raw = info.spr3_raw;
+        this->sum1_norm = info.sum1_norm;
+        this->sum2_norm = info.sum2_norm;
+        this->spr1_norm = info.spr1_norm;
+        this->spr3_norm = info.spr3_norm;
+        this->expression_level = info.expression_level;
+        return *this;
+    }
+
     QString miR_index;
     QString miR_name;
     QString miR_seq;
@@ -48,46 +93,6 @@ public:
     std::vector<QString> spr1_norm;
     std::vector<QString> spr3_norm;
     QString expression_level;
-//    QString Sum11_raw;
-//    QString Sum12_raw;
-//    QString Sum13_raw;
-//    QString Sum14_raw;
-//    QString Sum15_raw;
-//    QString Sum21_raw;
-//    QString Sum22_raw;
-//    QString Sum23_raw;
-//    QString Sum24_raw;
-//    QString Sum25_raw;
-//    QString Spr11_raw;
-//    QString Spr12_raw;
-//    QString Spr13_raw;
-//    QString Spr14_raw;
-//    QString Spr15_raw;
-//    QString Spr31_raw;
-//    QString Spr32_raw;
-//    QString Spr33_raw;
-//    QString Spr34_raw;
-//    QString Spr35_raw;
-//    QString Sum11_norm;
-//    QString Sum12_norm;
-//    QString Sum13_norm;
-//    QString Sum14_norm;
-//    QString Sum15_norm;
-//    QString Sum21_norm;
-//    QString Sum22_norm;
-//    QString Sum23_norm;
-//    QString Sum24_norm;
-//    QString Sum25_norm;
-//    QString Spr11_norm;
-//    QString Spr12_norm;
-//    QString Spr13_norm;
-//    QString Spr14_norm;
-//    QString Spr15_norm;
-//    QString Spr31_norm;
-//    QString Spr32_norm;
-//    QString Spr33_norm;
-//    QString Spr34_norm;
-//    QString Spr35_norm;
 };
 
 #endif // ONESEARCHINFO_H

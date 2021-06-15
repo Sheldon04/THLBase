@@ -20,4 +20,8 @@ static const QString itemNames[50] = {
     "expression_level"
 };
 
+enum SortKey {
+    ID, DG, CG, MIR_NAME
+};
+
 #endif // GLOBAL_H
