@@ -12,6 +12,7 @@
 #include "databasemanager.h"
 #include "service.h"
 #include "avltree.h"
+#include "detailinfowindow.h"
 
 using std::vector;
 namespace Ui {

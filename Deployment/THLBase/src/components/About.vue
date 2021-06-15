@@ -6,7 +6,7 @@
       </div>
       <div class="text item">
         <ul>
-          <li class="centerText">Author: 田森茂 洪刚忆 李海涛</li>
+          <li class="centerText">Author: 田森茂 洪纲忆 李海涛</li>
           <br>
           <li class="centerText">CopyRight: 2021-2025</li>
         </ul>

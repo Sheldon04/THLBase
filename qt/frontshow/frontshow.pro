@@ -33,7 +33,8 @@ SOURCES += \
     databasemanager.cpp \
     userwindow.cpp \
     service.cpp \
-    avltree.cpp
+    avltree.cpp \
+    detailinfowindow.cpp
 
 HEADERS += \
     aboutusdialog.h \
@@ -53,7 +54,8 @@ HEADERS += \
     userwindow.h \
     diffexpinfoitem.h \
     service.h \
-    avltree.h
+    avltree.h \
+    detailinfowindow.h
 
 FORMS += \
     aboutusdialog.ui \
@@ -65,7 +67,8 @@ FORMS += \
     mainwindow.ui \
     register.ui \
     searchdata.ui \
-    userwindow.ui
+    userwindow.ui \
+    detailinfowindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

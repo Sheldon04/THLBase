@@ -12,7 +12,7 @@ import lombok.ToString;
 
 public class MicroRNA {
     //common info
-    private String miR_index;
+    private Integer miR_index;
     private String miR_name;
     private String miR_seq;
     private String expression_level;
@@ -79,6 +79,6 @@ public class MicroRNA {
     private String up_down;
     private String fold_change;
     private String log2_fold_change;
-    private String p_value;
+    private Double p_value;
 
 }

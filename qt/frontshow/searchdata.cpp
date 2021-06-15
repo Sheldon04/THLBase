@@ -30,6 +30,11 @@ SearchData::SearchData(QWidget *parent) :
     ui->pushButton->setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px;");
     ui->pushButton_2->setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px;");
     ui->pushButton_3->setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px;");
+    ui->pushButton_4->setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px;");
+    ui->pushButton_5->setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px;");
+    ui->pushButton_6->setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px;");
+    //ui->comboBox->setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px;");
+
     ui->tableWidget->setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px;");
     //ui->textEdit->setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px;");
     ui->lineEdit->setStyleSheet("border:2px groove gray;border-radius:10px;padding:2px 4px;");
@@ -295,6 +300,8 @@ void SearchData::on_pushButton_5_clicked()
 
 
         QAxObject* speCell;
+
+        qDebug()<< "Size: " << searchResult.size();
         // 设置创建出的单元格的值
         for (size_t i = 0; i < searchResult.size(); i++) {
             speCell = sheet->querySubObject("Cells(int,int)", 2+i, 1); speCell->dynamicCall("Value",searchResult[i].miR_index);
@@ -360,6 +367,8 @@ void SearchData::on_pushButton_5_clicked()
             speCell = sheet->querySubObject("Cells(int,int)", 2+i, 49); speCell->dynamicCall("Value",searchResult[i].expression_level);
 
         }
+
+        qDebug()<< "Write over!";
 
         QDate D; D=QDate::currentDate();
         QTime T; T=QTime::currentTime();
@@ -458,5 +467,6 @@ void SearchData::on_bt_detail_clicked()
         QMessageBox::information(this, "Infomation", "MiRNA " + name + " is not found in current results.");
         return;
     }
-    // TODO
+    DetailInfoWindow *detailWindow = new DetailInfoWindow(this->searchResult[idx]);
+    detailWindow->show();
 }

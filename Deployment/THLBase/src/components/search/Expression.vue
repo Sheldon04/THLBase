@@ -9,7 +9,8 @@
         <el-table
           v-loading="loading"
           :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
-          style="width: 100%">
+          style="width: 100%"
+          @sort-change="onSortChange">
           <el-table-column
             prop="miR_index"
             label="ID"
@@ -42,7 +43,7 @@
           <el-table-column
             prop="dg"
             label="Free Energy"
-            :sortable="true"
+            sortable="custom"
             width="180">
           </el-table-column>
           <el-table-column
@@ -111,6 +112,40 @@ export default {
     filterHandler (value, row, column) {
       const property = column['property']
       return row[property] === value
+    },
+    /**
+     * 表格排序事件处理函数
+     * @param {object} {column,prop,order} 列数据|排序字段|排序方式
+     */
+    onSortChange ({ prop, order }) {
+      this.tableData.sort(this.compare(prop, order))
+    },
+
+    /**
+     * 排序比较
+     * @param {string} propertyName 排序的属性名
+     * @param {string} sort ascending(升序)/descending(降序)
+     * @return {function}
+     */
+    compare (propertyName, sort) {
+      return function (obj1, obj2) {
+        var value1 = obj1[propertyName]
+        var value2 = obj2[propertyName]
+        console.log(typeof obj1['miR_index'])
+        if (sort == null) {
+          let v1 = Number(obj1['miR_index'])
+          let v2 = Number(obj2['miR_index'])
+          const res = (v1 - v2) <= 0 ? -1 : 1
+          return res
+        }
+        if (typeof value1 === 'string' && typeof value2 === 'string') {
+          let v1 = Number(value1)
+          let v2 = Number(value2)
+          const res = (v1 - v2) <= 0 ? -1 : 1
+          // const res = value1.localeCompare(value2, 'zh')
+          return sort === 'ascending' ? res : -res
+        }
+      }
     }
   },
   created () {
