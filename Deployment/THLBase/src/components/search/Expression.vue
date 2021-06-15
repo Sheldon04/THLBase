@@ -131,7 +131,6 @@ export default {
       return function (obj1, obj2) {
         var value1 = obj1[propertyName]
         var value2 = obj2[propertyName]
-        console.log(typeof obj1['miR_index'])
         if (sort == null) {
           let v1 = Number(obj1['miR_index'])
           let v2 = Number(obj2['miR_index'])
@@ -149,7 +148,7 @@ export default {
     }
   },
   created () {
-    this.$http.get('http://47.106.148.74:8989/mirna/findAll').then(res => {
+    this.$http.get('http://127.0.0.1:8989/mirna/findAll').then(res => {
       this.tableData = res.data
       this.total = res.data.size
       this.loading = false

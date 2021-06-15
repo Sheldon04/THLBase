@@ -9,7 +9,8 @@
         <el-table
           v-loading="loading"
           :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
-          style="width: 100%">
+          style="width: 100%"
+          @sort-change="onSortChange">
           <el-table-column
             prop="miR_index"
             label="ID"
@@ -27,9 +28,8 @@
           </el-table-column>
           <el-table-column
             prop="p_value"
-            label="pValue"
-            :filters="[{text: 'high', value: 'high'}, {text: 'middle', value: 'middle'}, {text: 'low', value: 'low'}]"
-            :filter-method="filterHandler"
+            label="p_value"
+            sortable="custom"
             width="220">
           </el-table-column>
           <el-table-column
@@ -104,10 +104,46 @@ export default {
     filterHandler (value, row, column) {
       const property = column['property']
       return row[property] === value
+    },
+    /**
+     * 表格排序事件处理函数
+     * @param {object} {column,prop,order} 列数据|排序字段|排序方式
+     */
+    onSortChange ({ prop, order }) {
+      this.tableData.sort(this.compare(prop, order))
+    },
+
+    /**
+     * 排序比较
+     * @param {string} propertyName 排序的属性名
+     * @param {string} sort ascending(升序)/descending(降序)
+     * @return {function}
+     */
+    compare (propertyName, sort) {
+      return function (obj1, obj2) {
+        var value1 = obj1[propertyName]
+        var value2 = obj2[propertyName]
+        if (sort == null) {
+          let v1 = Number(obj1['miR_index'])
+          let v2 = Number(obj2['miR_index'])
+          const res = (v1 - v2) <= 0 ? -1 : 1
+          return res
+        }
+        if (typeof value1 === 'string' && typeof value2 === 'string') {
+          const res = value1.localeCompare(value2, 'zh')
+          return sort === 'ascending' ? res : -res
+        } else {
+          if (value1 <= value2) {
+            return sort === 'ascending' ? -1 : 1
+          } else if (value1 > value2) {
+            return sort === 'ascending' ? 1 : -1
+          }
+        }
+      }
     }
   },
   created () { // 从后端获取数据  起始构造属性
-    this.$http.get('http://47.106.148.74:8989/mirna/findDiffExpTotal').then(res => {
+    this.$http.get('http://127.0.0.1:8989/mirna/findDiffExpTotal').then(res => {
       this.tableData = res.data
       this.total = res.data.size
       this.loading = false
@@ -125,5 +161,10 @@ export default {
   position: absolute;
   top: 88px;
   left: 350px;
+}
+
+.table {
+  position: absolute;
+  left: 200px;
 }
 </style>
