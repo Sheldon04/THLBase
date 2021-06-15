@@ -13,29 +13,29 @@
           <el-table-column
             prop="miR_index"
             label="ID"
-            width="180">
+            width="250">
           </el-table-column>
           <el-table-column
             prop="miR_name"
             label="RNA Name"
-            width="240">
+            width="350">
           </el-table-column>
           <el-table-column
             prop="miR_seq"
             label="Sequence"
-            width="280">
+            width="400">
           </el-table-column>
           <el-table-column
             prop="p_value"
             label="pValue"
             :filters="[{text: 'high', value: 'high'}, {text: 'middle', value: 'middle'}, {text: 'low', value: 'low'}]"
             :filter-method="filterHandler"
-            width="180">
+            width="220">
           </el-table-column>
           <el-table-column
             prop="more"
             label="Details"
-            width="180">
+            width="220">
             <template slot-scope="scope">
               <el-button @click="handleClick(scope.row)" type="text" size="small">More</el-button>
             </template>
