@@ -137,8 +137,8 @@ export default {
     this.miR_name = this.$route.query.name
     let name = this.miR_name.toLowerCase()
     var words = []
-    words = name.split('-')
-    let queryWord = 'https://api.labs.cognitive.microsoft.com/academic/v1.0/evaluate?expr=And(And(AW=%27' + words[0] + '%27,AW=%27' + words[1] + '%27),AW=%27' + words[2] + '%27)&model=latest&count=100&offset=0&attributes=Ti,AW,AA.AuN,Y,CC,DOI&subscription-key=4f2ddbedc9ae48638b0e969e988b48ec'
+    words = name.split(/[-_]/)
+    let queryWord = 'https://api.labs.cognitive.microsoft.com/academic/v1.0/evaluate?expr=And(And(AW=%27' + words[0] + '%27,AW=%27' + words[1] + '%27),AW=%27' + words[2] + '%27)&model=latest&count=30&offset=0&attributes=Ti,AW,AA.AuN,Y,CC,DOI&subscription-key=4f2ddbedc9ae48638b0e969e988b48ec'
     this.$http.get(queryWord).then(res => {
       console.log(res.data)
       this.tableData = res.data['entities']

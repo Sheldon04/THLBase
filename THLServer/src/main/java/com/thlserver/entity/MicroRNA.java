@@ -80,5 +80,4 @@ public class MicroRNA {
     private String fold_change;
     private String log2_fold_change;
     private Double p_value;
-
 }

@@ -70,7 +70,7 @@
     </el-card>
     <el-card class="box-card-2">
       <div slot="header" class="clearfix">
-        <span>Spr3 vs Spr1</span>
+        <span>Sum1 vs Spr1</span>
       </div>
       <div class="text item">
         <ul>
@@ -87,7 +87,7 @@
     </el-card>
     <el-card class="box-card-3">
       <div slot="header" class="clearfix">
-        <span>Spr3 vs Spr1</span>
+        <span>Sum1 vs Spr3</span>
       </div>
       <div class="text item">
         <ul>
@@ -104,7 +104,7 @@
     </el-card>
     <el-card class="box-card-4">
       <div slot="header" class="clearfix">
-        <span>Spr3 vs Spr1</span>
+        <span>Sum1 vs Sum2</span>
       </div>
       <div class="text item">
         <ul>

@@ -143,7 +143,7 @@ export default {
     }
   },
   created () { // 从后端获取数据  起始构造属性
-    this.$http.get('http://127.0.0.1:8989/mirna/findDiffExpTotal').then(res => {
+    this.$http.get('http://47.106.148.74:8989/mirna/findDiffExpTotal').then(res => {
       this.tableData = res.data
       this.total = res.data.size
       this.loading = false
@@ -165,6 +165,6 @@ export default {
 
 .table {
   position: absolute;
-  left: 200px;
+  left: 50px;
 }
 </style>
