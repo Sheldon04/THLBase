@@ -250,7 +250,8 @@ void SearchData::show()
 void SearchData::on_pushButton_4_clicked()
 {
 //    show();
-    DataBaseManager::modifyData(this->modifyBuffer);
+    int time = DataBaseManager::modifyData(this->modifyBuffer);
+    QMessageBox::information(this, "Information", "Successfully update the data in " + QString::number(time) + " ms");
 }
 
 void SearchData::on_tableWidget_cellClicked(int row, int column)
@@ -275,7 +276,8 @@ void SearchData::deleteItems()
     {
         dItemNames.push_back(item.first);
     }
-    DataBaseManager::deleteRecords(dItemNames);
+    int time = DataBaseManager::deleteRecords(dItemNames);
+    QMessageBox::information(this, "Information", "Delete the items in " + QString::number(time) + " ms");
 }
 
 void SearchData::on_pushButton_5_clicked()

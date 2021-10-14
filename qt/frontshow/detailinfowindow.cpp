@@ -29,7 +29,6 @@ DetailInfoWindow::DetailInfoWindow(oneSearchInfo &info) :
         temp.append(info.sum1_raw[i] + " ");
     }
     ui->textBrowser->append(temp);
-    ui->textBrowser->append("");
 
     temp = "";
     ui->textBrowser->append("sum2(row)");
@@ -38,7 +37,6 @@ DetailInfoWindow::DetailInfoWindow(oneSearchInfo &info) :
         temp.append(info.sum2_raw[i] + " ");
     }
     ui->textBrowser->append(temp);
-    ui->textBrowser->append("");
 
     temp = "";
     ui->textBrowser->append("spr1(row)");
@@ -47,7 +45,6 @@ DetailInfoWindow::DetailInfoWindow(oneSearchInfo &info) :
         temp.append(info.spr1_raw[i] + " ");
     }
     ui->textBrowser->append(temp);
-    ui->textBrowser->append("");
 
     temp = "";
     ui->textBrowser->append("spr3(row)");
@@ -56,7 +53,6 @@ DetailInfoWindow::DetailInfoWindow(oneSearchInfo &info) :
         temp.append(info.spr3_raw[i] + " ");
     }
     ui->textBrowser->append(temp);
-    ui->textBrowser->append("");
 
     temp = "";
     ui->textBrowser->append("sum1(norm)");
@@ -65,7 +61,6 @@ DetailInfoWindow::DetailInfoWindow(oneSearchInfo &info) :
         temp.append(info.sum1_norm[i] + " ");
     }
     ui->textBrowser->append(temp);
-    ui->textBrowser->append("");
 
     temp = "";
     ui->textBrowser->append("sum2(norm)");
@@ -74,7 +69,6 @@ DetailInfoWindow::DetailInfoWindow(oneSearchInfo &info) :
         temp.append(info.sum2_norm[i] + " ");
     }
     ui->textBrowser->append(temp);
-    ui->textBrowser->append("");
 
     temp = "";
     ui->textBrowser->append("spr1(norm)");
@@ -83,7 +77,6 @@ DetailInfoWindow::DetailInfoWindow(oneSearchInfo &info) :
         temp.append(info.spr1_norm[i] + " ");
     }
     ui->textBrowser->append(temp);
-    ui->textBrowser->append("");
 
     temp = "";
     ui->textBrowser->append("spr3(norm)");
